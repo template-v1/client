@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
+.footer {
+  background: #0d3a40;
+  color: #fff;
+  padding: 64px 0 0 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.col {
+  flex: 1;
+  min-width: 260px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.desc {
+  margin-bottom: 32px;
+  color: #e0e0e0;
+}
+
+.socials {
+  display: flex;
+  gap: 20px;
+}
+
+.socialBtn {
+  background: #fff;
+  color: #0d3a40;
+  border-radius: 24px;
+  width: auto;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.socialBtn:hover {
+  background: #ff4d32;
+  color: #fff;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #b0c4c8;
+}
+
+.contact b {
+  color: #fff;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.newsletter {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.inputWrap {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 18px 10px 14px;
+  border-radius: 24px;
+  border: none;
+  outline: none;
+  background: #fff;
+  color: #222;
+}
+
+.inputIcon {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b0c4c8;
+}
+
+.subscribeBtn {
+  background: #ff4d32;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255,77,50,0.12);
+  transition: background 0.2s;
+}
+
+.subscribeBtn:hover {
+  background: #d63a22;
+}
+
+.bottom {
+  border-top: 1px solid #1e545a;
+  margin-top: 56px;
+  padding: 32px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.logoWrap {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.logo {
+  width: 56px;
+  height: 56px;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.slogan {
+  font-weight: 500;
+  color: #b0c4c8;
+  letter-spacing: 1px;
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: #ff4d32;
+}
+
+@media (max-width: 900px) {
+  .top {
+    flex-direction: column;
+    gap: 48px;
+  }
+  .bottom {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+}

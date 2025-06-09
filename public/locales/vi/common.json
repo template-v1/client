@@ -1,0 +1,73 @@
+{
+  "header": {},
+  "homePage": {
+    "home": {
+      "leftBarText": "Liên hệ dịch vụ - Gửi tin nhắn",
+      "titleWhite": "Nhanh và An toàn",
+      "titleOrange": "Vận chuyển.",
+      "desc": "Chúng tôi tự hào cung cấp dịch vụ vận chuyển tốt nhất hiện nay trên toàn thế giới.",
+      "explore": "Khám phá dịch vụ"
+    },
+    "about": {
+      "titleBold": "Về ",
+      "titleColor": "Công ty",
+      "desc": "Chúng tôi tự hào cung cấp dịch vụ vận chuyển và giao nhận tốt nhất trên toàn thế giới. Đội ngũ nhân viên chuyên nghiệp.",
+      "more": "TÌM HIỂU THÊM",
+      "discover": "KHÁM PHÁ THÊM",
+      "genuine": "+ Đánh giá thực"
+    },
+    "service": {
+      "warehousing": "Kho bãi",
+      "air": "Vận chuyển hàng không",
+      "ocean": "Vận chuyển đường biển",
+      "road": "Vận chuyển đường bộ",
+      "extra": "Dịch vụ bổ sung"
+    },
+    "services": {
+      "title": "Dịch vụ",
+      "accent": "Logistics"
+    },
+    "counter": {
+      "experience": "+ Năm kinh nghiệm",
+      "cities": "+ Thành phố toàn cầu",
+      "clients": "+ Khách hàng hài lòng",
+      "companies": "+ Doanh nghiệp hợp tác"
+    },
+    "feedback": {
+      "title": "Phản hồi",
+      "accent": "Khách hàng",
+      "reviews": "Đánh giá",
+      "excellent": "ĐIỂM XUẤT SẮC"
+    },
+    "feedback.1": "Dịch vụ tuyệt vời, giao hàng nhanh và đáng tin cậy!",
+    "feedback.2": "Tiết kiệm thời gian và công sức. Kargon là giải pháp tuyệt vời cho doanh nghiệp của chúng tôi.",
+    "feedback.3": "Rất hài lòng.",
+    "choose": {
+      "title": "Tại sao",
+      "accent": "chọn chúng tôi",
+      "desc": "Bạn có thể biết giá vận chuyển trước. Chúng tôi cung cấp giải pháp thông minh cho vận tải đường bộ, đường sắt và các dịch vụ đặc biệt.",
+      "l1": "Giải pháp chuỗi cung ứng.",
+      "l2": "Vận chuyển trọn gói.",
+      "l3": "Kho bãi & phân phối.",
+      "viewAll": "XEM TẤT CẢ DỊCH VỤ"
+    },
+    "pricing": {
+      "title": "Chọn",
+      "accent": "Gói phù hợp",
+      "basic": "Cơ bản",
+      "premium": "Cao cấp",
+      "gold": "Vàng",
+      "sub": "Giá tốt nhất cho doanh nghiệp",
+      "choose": "CHỌN GÓI",
+      "f1": "1 kho bãi",
+      "f2": "Quy tắc kinh doanh tùy chỉnh",
+      "f3": "So sánh giá theo thời gian thực",
+      "f4": "50 chuyến hàng",
+      "f5": "Không bao gồm bảo hiểm",
+      "f6": "75 chuyến hàng",
+      "f7": "Bao gồm bảo hiểm",
+      "f8": "2 kho bãi",
+      "f9": "10 chuyến hàng"
+    }
+  }
+}

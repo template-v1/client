@@ -1,0 +1,73 @@
+{
+  "header": {},
+  "homePage" : {
+    "home": {
+      "leftBarText": "Get our service - Send a message",
+      "titleWhite": "Fast and Safe",
+      "titleOrange": "Transportation.",
+      "desc": "We pride ourselves on providing the best transport services currently available all over the world.",
+      "explore": "Explore services"
+    },
+    "about": {
+      "titleBold": "About ",
+      "titleColor": "Company",
+      "desc": "We pride ourselves on providing the best transport and shipping services available all over the world. Our skilled personnel.",
+      "more": "MORE ABOUT US",
+      "discover": "DISCOVER MORE",
+      "genuine": "+ Genuine Ratings"
+    },
+    "service": {
+      "warehousing": "Warehousing",
+      "air": "Air Freight",
+      "ocean": "Ocean Freight",
+      "road": "Road Freight",
+      "extra": "Extra Service"
+    },
+    "services": {
+      "title": "Logistics",
+      "accent": "Services"
+    },
+    "counter": {
+      "experience": "+ Years of Experience",
+      "cities": "+ Cities Served Worldwide",
+      "clients": "+ Satisfied Clients",
+      "companies": "+ Company We Help"
+    },
+    "feedback": {
+      "title": "Customers",
+      "accent": "Feedback",
+      "reviews": "Reviews",
+      "excellent": "EXCELLENT SCORE"
+    },
+    "feedback.1": "Great service, very reliable and fast delivery!",
+    "feedback.2": "It really saves me time and effort. Kargon is exactly what our business has been lacking.",
+    "feedback.3": "Very satisfied.",
+    "choose": {
+      "title": "Why You",
+      "accent": "Choose Us",
+      "desc": "You can know the price for your transportation in advance. We offer intelligent concepts for road and rail as well as complex special transport services.",
+      "l1": "Supply Chain Solutions.",
+      "l2": "End-to-End Transportation.",
+      "l3": "Warehousing & Distribution.",
+      "viewAll": "VIEW ALL SERVICES"
+    },
+    "pricing": {
+      "title": "Choose",
+      "accent": "Perfect Plan",
+      "basic": "Basic",
+      "premium": "Premium",
+      "gold": "Gold",
+      "sub": "Our best professional rates",
+      "choose": "CHOOSE PLANS",
+      "f1": "1 Warehouse",
+      "f2": "Custom Business Rules",
+      "f3": "Realtime Rate Shopping",
+      "f4": "50 Freight Shipments",
+      "f5": "Not Included Insurance",
+      "f6": "75 Freight Shipments",
+      "f7": "Included Insurance",
+      "f8": "2 Warehouse",
+      "f9": "10 Freight Shipments"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.inputV2Container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.inputV2Label {
+  font-weight: 600;
+  color: #183153;
+  margin-bottom: 2px;
+}
+.inputV2Input,
+.inputV2Textarea {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+.inputV2Input:focus,
+.inputV2Textarea:focus {
+  border-color: #FF4D30;
+}
+.inputV2Error {
+  margin-top: 2px;
+}
