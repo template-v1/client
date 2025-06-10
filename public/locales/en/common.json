@@ -69,5 +69,193 @@
       "f8": "2 Warehouse",
       "f9": "10 Freight Shipments"
     }
+  },
+  "servicePage": {
+    "banner": {
+      "title": "Service",
+      "breadcrumbHome": "Home",
+      "breadcrumbCurrent": "Service"
+    },
+    "services": {
+      "subtitle": "01 _ OUR SERVICES",
+      "title": "Logistics services",
+      "list": {
+        "warehousing": "Warehousing",
+        "air": "Air Freight",
+        "ocean": "Ocean Freight",
+        "road": "Road Freight",
+        "rail": "Rail Freight",
+        "solution": "Logistic Solution"
+      }
+    },
+    "cta": {
+      "title": "Looking for the best logistics\ntransport service?",
+      "button": "Contact Us"
+    },
+    "process": {
+      "subtitle": "02 _ OUR PROCESS",
+      "title": "Easy steps to receive your cargo",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Order Processing",
+          "desc": "The logistics process begins with the receipt of customer..."
+        },
+        {
+          "step": "02",
+          "title": "Warehousing",
+          "desc": "Goods that are ready for shipment are stored in warehouses or..."
+        },
+        {
+          "step": "03",
+          "title": "Order Tracking",
+          "desc": "Real-time tracking systems are used to monitor the..."
+        },
+        {
+          "step": "04",
+          "title": "Product Delivery",
+          "desc": "In the final stage of logistics services."
+        }
+      ]
+    },
+    "pricing": {
+      "subtitle": "03 _ OUR PRICING",
+      "title": "Choose perfect plan",
+      "plans": {
+        "basic": "Basic",
+        "premium": "Premium",
+        "gold": "Gold"
+      },
+      "desc": "Our best professional rates",
+      "features": {
+        "warehouse1": "1 Warehouse",
+        "warehouse2": "2 Warehouse",
+        "customRules": "Custom Business Rules",
+        "realtimeRate": "Realtime Rate Shopping",
+        "freight50": "50 Freight Shipments",
+        "freight75": "75 Freight Shipments",
+        "freight10": "10 Freight Shipments",
+        "insuranceIncluded": "Included Insurance",
+        "insuranceNotIncluded": "Not Included Insurance"
+      },
+      "choose": "CHOOSE PLAN"
+    },
+    "faqContact": {
+      "subtitle": "04 _ EXPERTS IN TECHNOLOGY FIELDS",
+      "title": "Leading global logistic and\ntransport agency",
+      "faqs": [
+        {
+          "q": "Can I specify a delivery date when ordering?",
+          "a": "We are committed to providing our customers with exceptional service while offering our employees the best training. There are many variations of passages of lorem ipsum is simply free text."
+        },
+        {
+          "q": "How can I track my shipments?",
+          "a": "You can track your shipments in real-time using our online tracking system."
+        },
+        {
+          "q": "What is included in your services?",
+          "a": "Our services include warehousing, freight, insurance, and more."
+        },
+        {
+          "q": "How can I safely use files?",
+          "a": "We ensure all files and documents are handled securely and confidentially."
+        }
+      ]
+    }
+  },
+  "blogPage": {
+    "banner": {
+      "title": "Blog Details",
+      "breadcrumbHome": "Home",
+      "breadcrumbCurrent": "Blog Details"
+    },
+    "meta": {
+      "author": "Admin",
+      "date": "May 25, 2025",
+      "comments": "10 Comment"
+    },
+    "content": {
+      "p1": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop.",
+      "p2": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.",
+      "p3": "consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. excepteur sint occaecat cupidatat non proident minim veniam.",
+      "p4": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius.",
+      "p5": "If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet."
+    },
+    "quote": {
+      "mark": "66",
+      "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+      "author": "Victoria Fawsitt"
+    },
+    "tags": {
+      "label": "Tags:",
+      "items": ["Logistic"]
+    },
+    "share": {
+      "label": "Share:"
+    },
+    "author": {
+      "name": "Josef Massey",
+      "date": "12 May 2025",
+      "desc": "But must explain to you how all this mistaken idea denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings"
+    },
+    "comments": {
+      "title": "#Comments",
+      "items": [
+        {
+          "avatar": "https://kargonhtml.websitelayout.net/img/avatar/avatar-02.jpg",
+          "name": "Denis Irwin",
+          "text": "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        },
+        {
+          "avatar": "https://kargonhtml.websitelayout.net/img/avatar/avatar-02.jpg",
+          "name": "Bruno Roach",
+          "text": "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        },
+        {
+          "avatar": "https://kargonhtml.websitelayout.net/img/avatar/avatar-02.jpg",
+          "name": "John Martin",
+          "text": "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ]
+    },
+    "reply": {
+      "title": "#Leave a reply",
+      "placeholder": "Your Reply",
+      "name": "Your Name",
+      "email": "Email Address",
+      "button": "LEAVE A REPLY"
+    },
+    "sidebar": {
+      "search": "Search...",
+      "recentTitle": "RECENT POSTS",
+      "recentPosts": [
+        {
+          "img": "/images/blog-demo.jpg",
+          "date": "January 20, 2025",
+          "title": "The advantages of a digital supply strategy"
+        },
+        {
+          "img": "/images/blog-demo.jpg",
+          "date": "January 20, 2025",
+          "title": "We very careful handling the valuable goods"
+        },
+        {
+          "img": "/images/blog-demo.jpg",
+          "date": "January 20, 2025",
+          "title": "Choosing the best logistics for your business"
+        }
+      ],
+      "categoriesTitle": "CATEGORIES",
+      "categories": [
+        { "name": "Business", "count": 2 },
+        { "name": "Corporate", "count": 1 },
+        { "name": "Warehousing", "count": 4 },
+        { "name": "Logistic", "count": 1 },
+        { "name": "Delivery", "count": 8 }
+      ],
+      "tagsTitle": "TAGS",
+      "tags": ["Agency", "Goods", "Business", "Logistic", "Delivery", "Cargo"],
+      "followTitle": "FOLLOW US"
+    }
   }
 }

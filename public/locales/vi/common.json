@@ -69,5 +69,193 @@
       "f8": "2 kho bãi",
       "f9": "10 chuyến hàng"
     }
+  },
+  "servicePage": {
+    "banner": {
+      "title": "Dịch vụ",
+      "breadcrumbHome": "Trang chủ",
+      "breadcrumbCurrent": "Dịch vụ"
+    },
+    "services": {
+      "subtitle": "01 _ DỊCH VỤ CỦA CHÚNG TÔI",
+      "title": "Dịch vụ logistics",
+      "list": {
+        "warehousing": "Kho bãi",
+        "air": "Vận chuyển hàng không",
+        "ocean": "Vận chuyển đường biển",
+        "road": "Vận chuyển đường bộ",
+        "rail": "Vận chuyển đường sắt",
+        "solution": "Giải pháp logistics"
+      }
+    },
+    "cta": {
+      "title": "Bạn đang tìm dịch vụ logistics\nvận chuyển tốt nhất?",
+      "button": "Liên hệ"
+    },
+    "process": {
+      "subtitle": "02 _ QUY TRÌNH",
+      "title": "Các bước nhận hàng dễ dàng",
+      "steps": [
+        {
+          "step": "01",
+          "title": "Tiếp nhận đơn hàng",
+          "desc": "Quy trình logistics bắt đầu với việc tiếp nhận đơn hàng từ khách hàng..."
+        },
+        {
+          "step": "02",
+          "title": "Lưu kho",
+          "desc": "Hàng hóa sẵn sàng vận chuyển sẽ được lưu trữ tại kho hoặc..."
+        },
+        {
+          "step": "03",
+          "title": "Theo dõi đơn hàng",
+          "desc": "Hệ thống theo dõi thời gian thực được sử dụng để giám sát..."
+        },
+        {
+          "step": "04",
+          "title": "Giao hàng",
+          "desc": "Giai đoạn cuối cùng của dịch vụ logistics."
+        }
+      ]
+    },
+    "pricing": {
+      "subtitle": "03 _ BẢNG GIÁ",
+      "title": "Chọn gói phù hợp",
+      "plans": {
+        "basic": "Cơ bản",
+        "premium": "Cao cấp",
+        "gold": "Vàng"
+      },
+      "desc": "Giá tốt nhất cho doanh nghiệp",
+      "features": {
+        "warehouse1": "1 kho bãi",
+        "warehouse2": "2 kho bãi",
+        "customRules": "Quy tắc kinh doanh tùy chỉnh",
+        "realtimeRate": "So sánh giá theo thời gian thực",
+        "freight50": "50 chuyến hàng",
+        "freight75": "75 chuyến hàng",
+        "freight10": "10 chuyến hàng",
+        "insuranceIncluded": "Bao gồm bảo hiểm",
+        "insuranceNotIncluded": "Không bao gồm bảo hiểm"
+      },
+      "choose": "CHỌN GÓI"
+    },
+    "faqContact": {
+      "subtitle": "04 _ CHUYÊN GIA TRONG LĨNH VỰC CÔNG NGHỆ",
+      "title": "Đơn vị logistics và\nvận chuyển hàng đầu thế giới",
+      "faqs": [
+        {
+          "q": "Tôi có thể chọn ngày giao hàng khi đặt không?",
+          "a": "Chúng tôi cam kết mang đến dịch vụ xuất sắc cho khách hàng cùng đội ngũ nhân viên được đào tạo bài bản. Có nhiều biến thể của các đoạn văn lorem ipsum chỉ là văn bản mẫu."
+        },
+        {
+          "q": "Làm sao để tôi theo dõi đơn hàng?",
+          "a": "Bạn có thể theo dõi đơn hàng theo thời gian thực qua hệ thống online của chúng tôi."
+        },
+        {
+          "q": "Dịch vụ của bạn bao gồm những gì?",
+          "a": "Dịch vụ của chúng tôi bao gồm kho bãi, vận chuyển, bảo hiểm và nhiều hơn nữa."
+        },
+        {
+          "q": "Làm sao để sử dụng file an toàn?",
+          "a": "Chúng tôi đảm bảo mọi file và tài liệu đều được xử lý bảo mật và an toàn."
+        }
+      ]
+    }
+  },
+  "blogPage": {
+    "banner": {
+      "title": "Chi tiết Blog",
+      "breadcrumbHome": "Trang chủ",
+      "breadcrumbCurrent": "Chi tiết Blog"
+    },
+    "meta": {
+      "author": "Quản trị viên",
+      "date": "25/05/2025",
+      "comments": "10 bình luận"
+    },
+    "content": {
+      "p1": "Lorem Ipsum chỉ là văn bản giả dùng trong ngành in ấn và sắp chữ. Lorem Ipsum đã là văn bản giả tiêu chuẩn của ngành kể từ những năm 1500, khi một thợ in vô danh lấy một bản in mẫu và xáo trộn nó để tạo ra một cuốn sách mẫu. Nó đã tồn tại không chỉ năm thế kỷ, mà còn nhảy vọt vào thời đại in ấn điện tử, về cơ bản không thay đổi. Nó được phổ biến vào những năm 1960 với việc phát hành các tờ Letraset chứa các đoạn Lorem Ipsum, và gần đây hơn với phần mềm xuất bản để bàn.",
+      "p2": "Lorem Ipsum chỉ là văn bản giả dùng trong ngành in ấn và sắp chữ. Lorem Ipsum đã là văn bản giả tiêu chuẩn của ngành kể từ những năm 1500, khi một thợ in vô danh lấy một bản in mẫu và xáo trộn nó để tạo ra một cuốn sách mẫu. Nó đã tồn tại không chỉ năm thế kỷ.",
+      "p3": "consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. excepteur sint occaecat cupidatat non proident minim veniam.",
+      "p4": "Không ai yêu thích đau đớn, theo đuổi nó hoặc muốn có nó, chỉ vì nó là đau đớn...",
+      "p5": "Nếu bạn định sử dụng một đoạn Lorem Ipsum, bạn cần chắc chắn rằng không có điều gì xấu hổ bị ẩn trong phần giữa của văn bản. Tất cả các trình tạo Lorem Ipsum trên Internet đều có xu hướng lặp lại các đoạn xác định trước khi cần thiết, làm cho đây là trình tạo thực sự đầu tiên trên Internet."
+    },
+    "quote": {
+      "mark": "66",
+      "text": "Một thực tế lâu đời là người đọc sẽ bị phân tâm bởi nội dung có thể đọc được của một trang khi nhìn vào bố cục của nó.",
+      "author": "Victoria Fawsitt"
+    },
+    "tags": {
+      "label": "Tags:",
+      "items": ["Logistic"]
+    },
+    "share": {
+      "label": "Chia sẻ:"
+    },
+    "author": {
+      "name": "Josef Massey",
+      "date": "12/05/2025",
+      "desc": "Nhưng phải giải thích cho bạn biết làm thế nào ý tưởng sai lầm này lên án niềm vui và ca ngợi nỗi đau được sinh ra và tôi sẽ cung cấp cho bạn một bản tường trình đầy đủ về hệ thống, và trình bày các giáo lý thực tế"
+    },
+    "comments": {
+      "title": "#Bình luận",
+      "items": [
+        {
+          "avatar": "https://kargonhtml.websitelayout.net/img/avatar/avatar-02.jpg",
+          "name": "Denis Irwin",
+          "text": "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        },
+        {
+          "avatar": "https://kargonhtml.websitelayout.net/img/avatar/avatar-02.jpg",
+          "name": "Bruno Roach",
+          "text": "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        },
+        {
+          "avatar": "https://kargonhtml.websitelayout.net/img/avatar/avatar-02.jpg",
+          "name": "John Martin",
+          "text": "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        }
+      ]
+    },
+    "reply": {
+      "title": "#Để lại bình luận",
+      "placeholder": "Nội dung bình luận",
+      "name": "Tên của bạn",
+      "email": "Địa chỉ Email",
+      "button": "GỬI BÌNH LUẬN"
+    },
+    "sidebar": {
+      "search": "Tìm kiếm...",
+      "recentTitle": "BÀI VIẾT MỚI",
+      "recentPosts": [
+        {
+          "img": "/images/blog-demo.jpg",
+          "date": "20/01/2025",
+          "title": "Lợi ích của chiến lược chuỗi cung ứng số"
+        },
+        {
+          "img": "/images/blog-demo.jpg",
+          "date": "20/01/2025",
+          "title": "Chúng tôi rất cẩn thận khi xử lý hàng hóa giá trị"
+        },
+        {
+          "img": "/images/blog-demo.jpg",
+          "date": "20/01/2025",
+          "title": "Chọn logistics tốt nhất cho doanh nghiệp của bạn"
+        }
+      ],
+      "categoriesTitle": "DANH MỤC",
+      "categories": [
+        { "name": "Kinh doanh", "count": 2 },
+        { "name": "Doanh nghiệp", "count": 1 },
+        { "name": "Kho bãi", "count": 4 },
+        { "name": "Logistic", "count": 1 },
+        { "name": "Giao hàng", "count": 8 }
+      ],
+      "tagsTitle": "TỪ KHÓA",
+      "tags": ["Agency", "Goods", "Business", "Logistic", "Delivery", "Cargo"],
+      "followTitle": "THEO DÕI CHÚNG TÔI"
+    }
   }
 }
