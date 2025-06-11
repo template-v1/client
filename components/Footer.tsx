@@ -1,4 +1,48 @@
-import styles from '@/styles/Footer.module.css';
+import styles from "@/styles/Footer.module.css";
+import {
+  FaFacebookF,
+  FaLinkedinIn,
+  FaXTwitter,
+  FaYoutube,
+} from "react-icons/fa6";
+
+const socials = [
+  { type: "facebook", href: "#" },
+  { type: "twitter", href: "#" },
+  { type: "youtube", href: "#" },
+  { type: "linkedin", href: "#" },
+];
+
+const SocialIcon = ({ type, href }: { type: string; href: string }) => {
+  const iconProps = { size: 28 };
+  let IconComp = null;
+  switch (type) {
+    case "facebook":
+      IconComp = FaFacebookF;
+      break;
+    case "twitter":
+      IconComp = FaXTwitter;
+      break;
+    case "youtube":
+      IconComp = FaYoutube;
+      break;
+    case "linkedin":
+      IconComp = FaLinkedinIn;
+      break;
+    default:
+      return null;
+  }
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={styles.socialIcon}
+    >
+      <IconComp {...iconProps} />
+    </a>
+  );
+};
 
 export default function Footer() {
   return (
@@ -7,21 +51,13 @@ export default function Footer() {
         <div className={styles.col}>
           <h2 className={styles.title}>About Kargon</h2>
           <p className={styles.desc}>
-            We pride ourselves on providing the best transport and shipping services.
+            We pride ourselves on providing the best transport and shipping
+            services.
           </p>
-          <div className={styles.socials}>
-            <a href="#" className={styles.socialBtn}>
-              {/* <span className="material-symbols-outlined">facebook</span> */}
-            </a>
-            <a href="#" className={styles.socialBtn}>
-              {/* <span className="material-symbols-outlined">close</span> */}
-            </a>
-            <a href="#" className={styles.socialBtn}>
-              {/* <span className="material-symbols-outlined">linkedin</span> */}
-            </a>
-            <a href="#" className={styles.socialBtn}>
-              {/* <span className="material-symbols-outlined">instagram</span> */}
-            </a>
+          <div className={`d-flex gap-3 ${styles.socials}`}>
+            {socials.map((s) => (
+              <SocialIcon key={s.type} type={s.type} href={s.href} />
+            ))}
           </div>
         </div>
         <div className={styles.col}>
@@ -50,7 +86,9 @@ export default function Footer() {
                 placeholder="Subscribe with us"
                 className={styles.input}
               />
-              <span className={`material-symbols-outlined ${styles.inputIcon}`}>person</span>
+              <span className={`material-symbols-outlined ${styles.inputIcon}`}>
+                person
+              </span>
             </div>
             <button className={styles.subscribeBtn} type="submit">
               SUBSCRIBE NOW

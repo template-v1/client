@@ -1,3 +1,5 @@
+'use client'
+
 import { DEFAULT_LANGUAGE, LANG_KEY } from "@/configs/config";
 import { LANGUAGES } from "@/constants/constants";
 import { useTranslation } from "next-i18next";

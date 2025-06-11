@@ -1,7 +1,5 @@
 :root {
   --primary-color: #FF4D30;
-  --main-bg: #fff;
-  --main-text: #183153;
 }
 
 .banner {
@@ -55,28 +53,16 @@
   color: var(--primary-color);
 }
 
-.container {
-  max-width: 1100px;
-  margin: 80px auto 0 auto;
-  padding: 0 16px 80px 16px;
-  display: flex;
-  justify-content: center;
-}
-.contactBox {
-  background: var(--main-bg);
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-}
+/* Contact Detail Section */
 .detailSection {
-  flex: 1;
-  background: rgba(24,49,83,0.95) url('/images/contact-detail-bg.jpg') center/cover no-repeat;
+  background: rgba(24,49,83,0.95);
   color: #fff;
-  padding: 48px 32px 40px 32px; 
+  padding: 48px 32px 40px 32px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  margin: 24px auto;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
 }
 .detailTitle {
   font-size: 1.5rem;
@@ -88,15 +74,12 @@
   color: #e5e7eb;
   margin-bottom: 18px;
 }
-.detailItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 18px;
-}
 .detailIcon {
-  flex-shrink: 0;
-  margin-top: 2px;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
 }
 .detailLabel {
   font-weight: 600;
@@ -105,15 +88,53 @@
 }
 .socials {
   display: flex;
-  gap: 16px;
+  gap: 24px;
   margin-top: 18px;
+  justify-content: flex-start;
 }
-.socials a img {
-  width: 28px;
-  height: 28px;
-  filter: brightness(0) invert(1);
-  transition: filter 0.2s;
+.socialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  color: #fff !important;
+  font-size: 28px;
+  background: transparent;
 }
-.socials a:hover img {
-  filter: brightness(0) invert(0.5) sepia(1) hue-rotate(-20deg) saturate(8) brightness(1.2);
+.socialIcon:hover {
+  border-color: var(--primary-color);
+  background: rgba(255,77,48,0.08);
+  color: var(--primary-color);
+}
+/* Overlay background image for detail section */
+.detailBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url('/images/bg-contact.jpg') center/cover no-repeat;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+@media (max-width: 991.98px) { /* Tablet */
+  .bannerContent {
+    padding: 0 0 32px 32px;
+  }
+}
+
+@media (max-width: 575.98px) { /* Mobile */
+  .bannerContent {
+    padding: 0 16px 24px 16px;
+    text-align: center;
+  }
+  .bannerTitle {
+    font-size: 2rem;
+  }
+  .breadcrumb {
+    justify-content: center;
+  }
 }

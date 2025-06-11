@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, memo } from 'react';
+import React, { useState, memo, Fragment } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 import bgContact from "@/public/images/bg-contact.jpg";
@@ -67,7 +67,8 @@ const PricingCard = memo(({ icon, name, price, desc, features }: PricingCardProp
   </div>
 ));
 
-const FAQAccordion = memo(({ faqs }: { faqs: any[] }) => {
+type FAQ = { q: string; a: string };
+const FAQAccordion = memo(({ faqs }: { faqs: FAQ[] }) => {
   const [openIdx, setOpenIdx] = useState<number>(-1);
   return (
     <div className={styles.faqAccordion}>
@@ -89,6 +90,17 @@ const FAQAccordion = memo(({ faqs }: { faqs: any[] }) => {
     </div>
   );
 });
+
+const MultilineTitle = ({ text, ...props }: { text?: string } & React.HTMLAttributes<HTMLHeadingElement>) => (
+  <h2 {...props}>
+    {text?.split('\n').map((line, idx) => (
+      <Fragment key={idx}>
+        {line}
+        <br />
+      </Fragment>
+    ))}
+  </h2>
+);
 
 const ServicePage = () => {
   const { t } = useTranslation('common');
@@ -127,14 +139,15 @@ const ServicePage = () => {
           <span className={styles.servicesSubtitle}>{servicePage.services?.subtitle}</span>
           <h2 className={styles.servicesTitle}>{servicePage.services?.title}</h2>
         </div>
-        <div className={styles.servicesGrid}>
-          {services.map((service, idx) => (
-            <ServiceCard
-              key={service.key}
-              image={service.image}
-              alt={t(`servicePage.services.list.${service.key}`)}
-              title={t(`servicePage.services.list.${service.key}`)}
-            />
+        <div className="row g-4">
+          {services.map((service) => (
+            <div className="col-12 col-md-4" key={service.key}>
+              <ServiceCard
+                image={service.image}
+                alt={t(`servicePage.services.list.${service.key}`)}
+                title={t(`servicePage.services.list.${service.key}`)}
+              />
+            </div>
           ))}
         </div>
       </section>
@@ -149,14 +162,7 @@ const ServicePage = () => {
           style={{ objectFit: "cover" }}
         />
         <div className={styles.ctaOverlay}>
-          <h2 className={styles.ctaTitle}>
-            {servicePage.cta?.title?.split('\n').map((line: string, idx: number) => (
-              <React.Fragment key={idx}>
-                {line}
-                <br />
-              </React.Fragment>
-            ))}
-          </h2>
+          <MultilineTitle text={servicePage.cta?.title} className={styles.ctaTitle} />
           <ButtonV2
             label={servicePage.cta?.button}
             type="primary"
@@ -172,112 +178,117 @@ const ServicePage = () => {
           <span className={styles.processSubtitle}>{servicePage.process?.subtitle}</span>
           <h2 className={styles.processTitle}>{servicePage.process?.title}</h2>
         </div>
-        <div className={styles.processSteps}>
-          {processSteps.map((item: any) => (
-            <div className={styles.processStep} key={item.step}>
-              <div className={styles.processStepTop}>
-                <span className={styles.processStepLabel}>Step {item.step}</span>
-                <span className={styles.processStepDot}></span>
+        <div className={styles.processSliderWrapper}>
+          <div className={styles.processSlider}>
+            {[...processSteps, ...processSteps].map((item: any, idx: number) => (
+              <div className={styles.processStep} key={idx + '-' + item.step}>
+                <div className={styles.processStepTop}>
+                  <span className={styles.processStepLabel}>Step {item.step}</span>
+                  <span className={styles.processStepDot}></span>
+                </div>
+                <div className={styles.processStepNum}>{item.step}</div>
+                <div className={styles.processStepTitle}>{item.title}</div>
+                <div className={styles.processStepDesc}>{item.desc}</div>
               </div>
-              <div className={styles.processStepNum}>{item.step}</div>
-              <div className={styles.processStepTitle}>{item.title}</div>
-              <div className={styles.processStepDesc}>{item.desc}</div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Pricing Section */}
       <section className={styles.pricingSection}>
-        <div className={styles.pricingHeader}>
-          <span className={styles.pricingSubtitle}>{servicePage.pricing?.subtitle}</span>
-          <h2 className={styles.pricingTitle}>{servicePage.pricing?.title}</h2>
-        </div>
-        <div className={styles.pricingGrid}>
-          <PricingCard
-            icon={
-              <svg width="48" height="48" fill="none"><circle cx="24" cy="24" r="22" stroke="#FF4D30" strokeWidth="2"/><path d="M24 32l-7.5 4 1.5-8.5-6-5.5 8.5-1 3.5-8 3.5 8 8.5 1-6 5.5 1.5 8.5-7.5-4z" stroke="#FF4D30" strokeWidth="2" strokeLinejoin="round"/></svg>
-            }
-            name={servicePage.pricing?.plans?.basic}
-            price="$149"
-            desc={servicePage.pricing?.desc}
-            features={[
-              { text: servicePage.pricing?.features?.warehouse1 },
-              { text: servicePage.pricing?.features?.customRules },
-              { text: servicePage.pricing?.features?.realtimeRate },
-              { text: servicePage.pricing?.features?.freight50, strike: true },
-              { text: servicePage.pricing?.features?.insuranceNotIncluded, strike: true },
-            ]}
-          />
-          <PricingCard
-            icon={
-              <svg width="48" height="48" fill="none"><circle cx="24" cy="24" r="22" stroke="#FF4D30" strokeWidth="2"/><path d="M24 32l-7.5 4 1.5-8.5-6-5.5 8.5-1 3.5-8 3.5 8 8.5 1-6 5.5 1.5 8.5-7.5-4z" stroke="#FF4D30" strokeWidth="2" strokeLinejoin="round"/><rect x="16" y="12" width="16" height="8" rx="4" stroke="#FF4D30" strokeWidth="2"/></svg>
-            }
-            name={servicePage.pricing?.plans?.premium}
-            price="$169"
-            desc={servicePage.pricing?.desc}
-            features={[
-              { text: servicePage.pricing?.features?.warehouse1 },
-              { text: servicePage.pricing?.features?.customRules },
-              { text: servicePage.pricing?.features?.realtimeRate },
-              { text: servicePage.pricing?.features?.freight75 },
-              { text: servicePage.pricing?.features?.insuranceIncluded, strike: true },
-            ]}
-          />
-          <PricingCard
-            icon={
-              <svg width="48" height="48" fill="none"><circle cx="24" cy="24" r="22" stroke="#FF4D30" strokeWidth="2"/><path d="M24 32l-7.5 4 1.5-8.5-6-5.5 8.5-1 3.5-8 3.5 8 8.5 1-6 5.5 1.5 8.5-7.5-4z" stroke="#FF4D30" strokeWidth="2" strokeLinejoin="round"/><path d="M24 12a12 12 0 0112 12" stroke="#FF4D30" strokeWidth="2"/></svg>
-            }
-            name={servicePage.pricing?.plans?.gold}
-            price="$199"
-            desc={servicePage.pricing?.desc}
-            features={[
-              { text: servicePage.pricing?.features?.warehouse2 },
-              { text: servicePage.pricing?.features?.customRules },
-              { text: servicePage.pricing?.features?.realtimeRate },
-              { text: servicePage.pricing?.features?.freight10 },
-              { text: servicePage.pricing?.features?.insuranceIncluded },
-            ]}
-          />
+        <div className="container">
+          <div className={styles.pricingHeader}>
+            <span className={styles.pricingSubtitle}>{servicePage.pricing?.subtitle}</span>
+            <h2 className={styles.pricingTitle}>{servicePage.pricing?.title}</h2>
+          </div>
+          <div className="row g-4 justify-content-center">
+            <div className="col-12 col-md-6 col-lg-4 d-flex">
+              <div className="w-100">
+                <PricingCard
+                  icon={
+                    <svg width="48" height="48" fill="none"><circle cx="24" cy="24" r="22" stroke="#FF4D30" strokeWidth="2"/><path d="M24 32l-7.5 4 1.5-8.5-6-5.5 8.5-1 3.5-8 3.5 8 8.5 1-6 5.5 1.5 8.5-7.5-4z" stroke="#FF4D30" strokeWidth="2" strokeLinejoin="round"/></svg>
+                  }
+                  name={servicePage.pricing?.plans?.basic}
+                  price="$149"
+                  desc={servicePage.pricing?.desc}
+                  features={[
+                    { text: servicePage.pricing?.features?.warehouse1 },
+                    { text: servicePage.pricing?.features?.customRules },
+                    { text: servicePage.pricing?.features?.realtimeRate },
+                    { text: servicePage.pricing?.features?.freight50, strike: true },
+                    { text: servicePage.pricing?.features?.insuranceNotIncluded, strike: true },
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="col-12 col-md-6 col-lg-4 d-flex">
+              <div className="w-100">
+                <PricingCard
+                  icon={
+                    <svg width="48" height="48" fill="none"><circle cx="24" cy="24" r="22" stroke="#FF4D30" strokeWidth="2"/><path d="M24 32l-7.5 4 1.5-8.5-6-5.5 8.5-1 3.5-8 3.5 8 8.5 1-6 5.5 1.5 8.5-7.5-4z" stroke="#FF4D30" strokeWidth="2" strokeLinejoin="round"/><rect x="16" y="12" width="16" height="8" rx="4" stroke="#FF4D30" strokeWidth="2"/></svg>
+                  }
+                  name={servicePage.pricing?.plans?.premium}
+                  price="$169"
+                  desc={servicePage.pricing?.desc}
+                  features={[
+                    { text: servicePage.pricing?.features?.warehouse1 },
+                    { text: servicePage.pricing?.features?.customRules },
+                    { text: servicePage.pricing?.features?.realtimeRate },
+                    { text: servicePage.pricing?.features?.freight75 },
+                    { text: servicePage.pricing?.features?.insuranceIncluded, strike: true },
+                  ]}
+                />
+              </div>
+            </div>
+            <div className="col-12 col-md-6 col-lg-4 d-flex">
+              <div className="w-100">
+                <PricingCard
+                  icon={
+                    <svg width="48" height="48" fill="none"><circle cx="24" cy="24" r="22" stroke="#FF4D30" strokeWidth="2"/><path d="M24 32l-7.5 4 1.5-8.5-6-5.5 8.5-1 3.5-8 3.5 8 8.5 1-6 5.5 1.5 8.5-7.5-4z" stroke="#FF4D30" strokeWidth="2" strokeLinejoin="round"/><path d="M24 12a12 12 0 0112 12" stroke="#FF4D30" strokeWidth="2"/></svg>
+                  }
+                  name={servicePage.pricing?.plans?.gold}
+                  price="$199"
+                  desc={servicePage.pricing?.desc}
+                  features={[
+                    { text: servicePage.pricing?.features?.warehouse2 },
+                    { text: servicePage.pricing?.features?.customRules },
+                    { text: servicePage.pricing?.features?.realtimeRate },
+                    { text: servicePage.pricing?.features?.freight10 },
+                    { text: servicePage.pricing?.features?.insuranceIncluded },
+                  ]}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* FAQ & Contact Section */}
       <section className={styles.expertSection} style={{ background: "#f7f9fa", padding: "64px 0" }}>
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            display: "flex",
-            gap: 40,
-            alignItems: "flex-start",
-            flexWrap: "wrap",
-          }}
-        >
-          {/* FAQ */}
-          <div style={{ flex: 1, minWidth: 340 }}>
-            <span style={{ color: "#FF4D30", fontWeight: 700, fontSize: "1rem", letterSpacing: 1 }}>
-              {servicePage.faqContact?.subtitle}
-            </span>
-            <h2 style={{
-              fontSize: "2.8rem",
-              fontWeight: 800,
-              color: "#183153",
-              margin: "16px 0 32px 0",
-              lineHeight: 1.1,
-            }}>
-              {servicePage.faqContact?.title?.split('\n').map((line: string, idx: number) => (
-                <React.Fragment key={idx}>
-                  {line}
-                  <br />
-                </React.Fragment>
-              ))}
-            </h2>
-            <FAQAccordion faqs={faqs} />
-          </div>
-          {/* Contact Form */}
-          <div>
-            <ContactForm />
+        <div className="container">
+          <div className="row g-4">
+            {/* FAQ */}
+            <div className="col-12 col-md-6">
+              <span style={{ color: "#FF4D30", fontWeight: 700, fontSize: "1rem", letterSpacing: 1 }}>
+                {servicePage.faqContact?.subtitle}
+              </span>
+              <MultilineTitle
+                text={servicePage.faqContact?.title}
+                style={{
+                  fontSize: "2.8rem",
+                  fontWeight: 800,
+                  color: "#183153",
+                  margin: "16px 0 32px 0",
+                  lineHeight: 1.1,
+                }}
+              />
+              <FAQAccordion faqs={faqs} />
+            </div>
+            {/* Contact Form */}
+            <div className="col-12 col-md-6">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </section>

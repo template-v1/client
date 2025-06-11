@@ -1,10 +1,58 @@
 'use client';
 
 import React from "react";
-import styles from "@/styles/Contact.module.css";
 import Image from "next/image";
 import bgContact from "@/public/images/bg-contact.jpg";
 import ContactForm from "@/components/ui/contactForm/ContactForm";
+import { FaLocationDot, FaPhone, FaFacebookF, FaXTwitter, FaYoutube, FaLinkedinIn } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+import styles from "@/styles/Contact.module.css";
+
+// Common SocialIcon component
+const SocialIcon = ({ type, href }: { type: string; href: string }) => {
+  const iconProps = { size: 28 };
+  let IconComp = null;
+  switch (type) {
+    case "facebook":
+      IconComp = FaFacebookF;
+      break;
+    case "twitter":
+      IconComp = FaXTwitter;
+      break;
+    case "youtube":
+      IconComp = FaYoutube;
+      break;
+    case "linkedin":
+      IconComp = FaLinkedinIn;
+      break;
+    default:
+      return null;
+  }
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+      <IconComp {...iconProps} />
+    </a>
+  );
+};
+
+// Common DetailItem component
+const DetailItem = ({
+  icon,
+  label,
+  children,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  children: React.ReactNode;
+}) => (
+  <div className="d-flex align-items-center gap-3 mb-3">
+    <div className={styles.detailIcon}>{icon}</div>
+    <div>
+      <div className={styles.detailLabel}>{label}</div>
+      {children}
+    </div>
+  </div>
+);
 
 const contactDetail = {
   title: "Our contact detail",
@@ -13,10 +61,10 @@ const contactDetail = {
   emails: ["info@example.com", "contact@example.com"],
   location: "Guild Street 51, North Town,\nLondon-06192, UK",
   socials: [
-    { href: "#", icon: "/icons/facebook.svg", alt: "Facebook" },
-    { href: "#", icon: "/icons/twitter.svg", alt: "Twitter" },
-    { href: "#", icon: "/icons/youtube.svg", alt: "YouTube" },
-    { href: "#", icon: "/icons/linkedin.svg", alt: "LinkedIn" },
+    { type: "facebook", href: "#" },
+    { type: "twitter", href: "#" },
+    { type: "youtube", href: "#" },
+    { type: "linkedin", href: "#" },
   ],
 };
 
@@ -34,66 +82,57 @@ export default function ContactPage() {
           priority
         />
         <div className={styles.bannerOverlay}>
-          <div className={styles.bannerContent}>
-            <h1 className={styles.bannerTitle}>Contact Us</h1>
-            <div className={styles.breadcrumb}>
-              <span>Home</span>
-              <span className={styles.breadcrumbDivider}></span>
-              <span className={styles.breadcrumbCurrent}>Contact Us</span>
+          <div className="container py-4 px-4 px-md-5">
+            <div className={`${styles.bannerContent} text-center text-md-start`}>
+              <h1 className={styles.bannerTitle}>Contact Us</h1>
+              <div className={`d-flex align-items-center gap-2 gap-md-3 justify-content-center justify-content-md-start ${styles.breadcrumb}`}>
+                <span>Home</span>
+                <span className={styles.breadcrumbDivider}></span>
+                <span className={styles.breadcrumbCurrent}>Contact Us</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className={styles.container}>
-        <div className={styles.contactBox}>
-          <ContactForm />
-          <div className={styles.detailSection}>
-            <h3 className={styles.detailTitle}>{contactDetail.title}</h3>
-            <p className={styles.detailDesc}>{contactDetail.desc}</p>
-            <div className={styles.detailItem}>
-              <div className={styles.detailIcon}>
-                {/* Phone SVG */}
-                <svg width="28" height="28" fill="none"><path d="M21 19v2a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2" stroke="#FF4D30" strokeWidth="2" /><path d="M17 3h6v6" stroke="#FF4D30" strokeWidth="2"/><path d="M11 17l12-12" stroke="#FF4D30" strokeWidth="2"/></svg>
-              </div>
-              <div>
-                <div className={styles.detailLabel}>Phone Number</div>
+      <div className="container py-5">
+        <div className="row g-4 justify-content-center">
+          {/* Form */}
+          <div className="col-12 col-lg-6">
+            {/* <div className="bg-white rounded-4 shadow-sm p-4 h-100"> */}
+              <ContactForm />
+            {/* </div> */}
+          </div>
+          {/* Contact Detail */}
+          <div className="col-12 col-lg-6">
+            <div className={`${styles.detailSection} rounded-4 h-100 position-relative p-4 p-lg-5`}>
+              <h3 className={styles.detailTitle}>{contactDetail.title}</h3>
+              <p className={styles.detailDesc}>{contactDetail.desc}</p>
+              <DetailItem icon={<FaPhone color="#FF4D30" />} label="Phone Number">
                 {contactDetail.phones.map((phone) => (
                   <div key={phone}>{phone}</div>
                 ))}
-              </div>
-            </div>
-            <div className={styles.detailItem}>
-              <div className={styles.detailIcon}>
-                {/* Email SVG */}
-                <svg width="28" height="28" fill="none"><path d="M4 7a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7z" stroke="#FF4D30" strokeWidth="2"/><path d="M22 7l-8 7-8-7" stroke="#FF4D30" strokeWidth="2"/></svg>
-              </div>
-              <div>
-                <div className={styles.detailLabel}>Email Address</div>
+              </DetailItem>
+              <DetailItem icon={<MdEmail color="#FF4D30" />} label="Email Address">
                 {contactDetail.emails.map((email) => (
                   <div key={email}>{email}</div>
                 ))}
-              </div>
-            </div>
-            <div className={styles.detailItem}>
-              <div className={styles.detailIcon}>
-                {/* Location SVG */}
-                <svg width="28" height="28" fill="none"><path d="M14 25s8-7.5 8-13A8 8 0 1 0 6 12c0 5.5 8 13 8 13z" stroke="#FF4D30" strokeWidth="2"/><circle cx="14" cy="12" r="3" stroke="#FF4D30" strokeWidth="2"/></svg>
-              </div>
-              <div>
-                <div className={styles.detailLabel}>Location</div>
+              </DetailItem>
+              <DetailItem icon={<FaLocationDot color="#FF4D30" />} label="Location">
                 <div>
                   {contactDetail.location.split('\n').map((line, i) => (
                     <React.Fragment key={i}>{line}<br /></React.Fragment>
                   ))}
                 </div>
+              </DetailItem>
+              <div className={`d-flex gap-3 ${styles.socials}`}>
+                {contactDetail.socials.map((s) => (
+                  <SocialIcon key={s.type} type={s.type} href={s.href} />
+                ))}
               </div>
-            </div>
-            <div className={styles.socials}>
-              {contactDetail.socials.map((s) => (
-                <a key={s.alt} href={s.href}><img src={s.icon} alt={s.alt} /></a>
-              ))}
+              {/* Overlay background image for detail section */}
+              <div className={styles.detailBg}></div>
             </div>
           </div>
         </div>

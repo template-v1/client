@@ -1,9 +1,13 @@
+'"use client";'
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
 import { I18nProvider } from "./providers";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,6 +48,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <ScrollToTopButton />
         </I18nProvider>
       </body>
     </html>

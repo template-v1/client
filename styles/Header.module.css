@@ -3,11 +3,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 1rem 2rem;
   z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   background: transparent;
   color: #fff;
   border-bottom: 0.5px solid rgba(86, 86, 86, 0.944);
@@ -16,12 +12,6 @@
     box-shadow 0.2s,
     color 0.2s,
     transform 0.5s cubic-bezier(0.4,0,0.2,1);
-}
-
-.logoWrap {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
 }
 
 .logoIcon {
@@ -48,10 +38,7 @@
 }
 
 .nav {
-  margin-left: 10rem;
   flex: 1;
-  display: flex;
-  justify-content: start;
 }
 
 .navList {
@@ -61,8 +48,6 @@
   font-size: 1.125rem;
   font-weight: 600;
 }
-
-.navItem {}
 
 .navLink {
   transition: color 0.2s;
@@ -92,12 +77,6 @@
   color: #FF4D30;
 }
 
-.actionWrap {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
 .headerScrolled {
   background: #fff;
   color: #183153;
@@ -115,12 +94,10 @@
 }
 
 .langDropdown {
-  padding: 6px 12px;
   border-radius: 4px;
   border: 1px solid #dbe3ea;
   background: #fff;
   font-size: 1rem;
-  margin-left: 16px;
   cursor: pointer;
   color: #1f2c3e;
   font-weight: 500;
@@ -129,4 +106,34 @@
 }
 .langDropdown:focus {
   border: 1.5px solid #FF4D30;
+}
+
+@keyframes dropdownOpen {
+  0% {
+    opacity: 0;
+    transform: translateY(-24px) scaleY(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes dropdownClose {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-24px) scaleY(0.95);
+  }
+}
+
+.mobileMenu {
+  animation: dropdownOpen 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+.mobileMenuOut {
+  animation: dropdownClose 0.25s cubic-bezier(0.4,0,0.2,1) forwards;
 }

@@ -815,3 +815,19 @@
   .pricingTitle { font-size: 28px; }
   .pricingCard { padding: 24px 12px 18px 12px; }
 }
+
+/* --- Primary Utility Classes --- */
+.text-primary {
+  color: #FF4D30 !important;
+}
+.bg-primary {
+  background-color: #FF4D30 !important;
+}
+.btn-primary {
+  background-color: #FF4D30;
+  border-color: #FF4D30;
+}
+.btn-primary:hover {
+  background-color: #e03e1a;
+  border-color: #e03e1a;
+}
