@@ -19,6 +19,7 @@ export function useLanguage() {
   }, []);
 
   const changeLanguage = (newLang: string) => {
+    debugger
     setLang(newLang);
     i18n.changeLanguage(newLang);
     if (typeof window !== "undefined") {

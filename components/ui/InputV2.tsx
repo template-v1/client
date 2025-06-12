@@ -1,7 +1,7 @@
 'use client'
 
 import React, { InputHTMLAttributes, TextareaHTMLAttributes, useState } from "react";
-import styles from '@/styles/Input.module.css';
+import styles from '@/public/styles/Input.module.css';
 
 type InputV2Props = {
   label?: string;

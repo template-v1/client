@@ -1,35 +1,25 @@
-'use client';
-import Image from "next/image";
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useRef, useState } from "react";
-import styles from "@/styles/Home.module.css";
-import bgHome from "@/public/images/bg-home.jpg";
+"use client";
+import { useSectionVisible } from "@/hooks/useSectionVisible";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 import about01 from "@/public/images/about-01.jpg";
 import about02 from "@/public/images/about-02.jpg";
+import Image from "next/image";
+import { StarRating } from "@/components/ui/StarRating";
+import { GlitchNumber } from "@/components/ui/GlitchNumber";
+import { Section } from "@/components/SectionRef";
+import FadeInSection from "@/components/FadeInSection";
+import { ServiceCard } from "@/components/ui/cards/ServiceCard";
 import service01 from "@/public/images/service-01.jpg";
 import service02 from "@/public/images/service-02.jpg";
 import service03 from "@/public/images/service-03.jpg";
 import service04 from "@/public/images/service-04.jpg";
 import service05 from "@/public/images/service-05.jpg";
-import feedback01 from "@/public/images/testimonial-01.jpg";
-import ButtonV2 from "@/components/ui/ButtonV2";
-import { useSectionVisible } from "@/hooks/useSectionVisible";
-import { StarRating } from "@/components/ui/StarRating";
-import { GlitchNumber } from "@/components/ui/GlitchNumber";
-import { useTranslation } from 'next-i18next';
-
-// ---------- Common Components ----------
-
-function Section({ children, className = "", visibleRef, showClass = "" }: { children: React.ReactNode, className?: string, visibleRef?: any, showClass?: string }) {
-  const visible = visibleRef ? useSectionVisible(visibleRef, 0.2) : true;
-  return (
-    <section ref={visibleRef} className={`${className} ${visible ? showClass : ""}`}>
-      {children}
-    </section>
-  );
-}
-
-// ---------- Data ----------
+import CounterItem from "@/components/CounterItem";
+import TestimonialCarousel from "@/components/ui/TestimonialCarousel";
+import { IoIosPlay } from "react-icons/io";
+import PricingCard from "@/components/ui/cards/PricingCard";
 
 const serviceCards = [
   { src: service01, alt: "Warehousing", name: "service.warehousing" },
@@ -39,413 +29,439 @@ const serviceCards = [
   { src: service05, alt: "Extra Service", name: "service.extra" },
 ];
 
-const feedbackUsers = [
-  {
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-    name: "Kristin",
-    stars: 5,
-    content: "feedback.1",
-  },
-  {
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-    name: "Kristin",
-    stars: 5,
-    content: "feedback.2"
-  },
-  {
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-    name: "Kristin",
-    stars: 5,
-    content: "feedback.3"
-  },
-];
-
 const counterData = [
-  { icon: "thumb_up", number: 35, label: "counter.experience" },
-  { icon: "public", number: 528, label: "counter.cities" },
-  { icon: "groups", number: 475, label: "counter.clients" },
-  { icon: "handshake", number: 45, label: "counter.companies" },
+  {
+    icon: "https://kargonhtml.websitelayout.net/img/icons/icon-14.png",
+    value: 35,
+    label: "+ Years of Experience",
+    delay: 200,
+  },
+  {
+    icon: "https://kargonhtml.websitelayout.net/img/icons/icon-15.png",
+    value: 528,
+    label: "+ Cities Served Worldwide",
+    delay: 350,
+  },
+  {
+    icon: "https://kargonhtml.websitelayout.net/img/icons/icon-16.png",
+    value: 475,
+    label: "+ Satisfied Clients",
+    delay: 500,
+  },
+  {
+    icon: "https://kargonhtml.websitelayout.net/img/icons/icon-17.png",
+    value: 45,
+    label: "+ Company We Help",
+    delay: 650,
+  },
 ];
 
-const pricingPlans = [
+const pricingData = [
   {
-    icon: "workspace_premium",
-    name: "pricing.basic",
+    iconUrl: "https://kargonhtml.websitelayout.net/img/icons/icon-1.png",
+    title: "Basic",
     price: 149,
-    period: "/mo",
-    sub: "pricing.sub",
+    priceSuffix: "/ mo",
+    description: "Our best professional rates",
     features: [
-      { text: "pricing.f1", included: true },
-      { text: "pricing.f2", included: true },
-      { text: "pricing.f3", included: true },
-      { text: "pricing.f4", included: false },
-      { text: "pricing.f5", included: false },
-    ]
+      "1 Warehouse",
+      "Custom Business Rules",
+      "Realtime Rate Shopping",
+      <del key="d1">50 Freight Shipments</del>,
+      <del key="d2">Not Included Insurance</del>,
+    ],
+    buttonUrl: "https://kargonhtml.websitelayout.net/contact.html",
+    buttonText: "Choose Plans",
+    wowDelay: "200ms",
   },
   {
-    icon: "emoji_events",
-    name: "pricing.premium",
+    iconUrl: "https://kargonhtml.websitelayout.net/img/icons/icon-2.png",
+    title: "Premium",
     price: 169,
-    period: "/mo",
-    sub: "pricing.sub",
+    priceSuffix: "/ mo",
+    description: "Our best professional rates",
     features: [
-      { text: "pricing.f1", included: true },
-      { text: "pricing.f2", included: true },
-      { text: "pricing.f3", included: true },
-      { text: "pricing.f6", included: true },
-      { text: "pricing.f7", included: false },
-    ]
+      "1 Warehouse",
+      "Custom Business Rules",
+      "Realtime Rate Shopping",
+      "75 Freight Shipments",
+      <del key="d1">Included Insurance</del>,
+    ],
+    buttonUrl: "https://kargonhtml.websitelayout.net/contact.html",
+    buttonText: "Choose Plans",
+    wowDelay: "350ms",
   },
   {
-    icon: "public",
-    name: "pricing.gold",
+    iconUrl: "https://kargonhtml.websitelayout.net/img/icons/icon-3.png",
+    title: "Gold",
     price: 199,
-    period: "/mo",
-    sub: "pricing.sub",
+    priceSuffix: "/ mo",
+    description: "Our best professional rates",
     features: [
-      { text: "pricing.f8", included: true },
-      { text: "pricing.f2", included: true },
-      { text: "pricing.f3", included: true },
-      { text: "pricing.f9", included: true },
-      { text: "pricing.f7", included: true },
-    ]
-  }
+      "2 Warehouse",
+      "Custom Business Rules",
+      "Realtime Rate Shopping",
+      "10 Freight Shipments",
+      "Included Insurance",
+    ],
+    buttonUrl: "https://kargonhtml.websitelayout.net/contact.html",
+    buttonText: "Choose Plans",
+    wowDelay: "500ms",
+  },
 ];
-
-// ---------- UI Components ----------
-
-function ServiceCard({ src, alt, name }: { src: any; alt: string; name: string }) {
-  const { t } = useTranslation('common');
-  // Sử dụng homePageI18n cho các key dịch vụ
-  const homePageI18n = t('homePage', { returnObjects: true }) as any;
-  // name ví dụ: "service.warehousing"
-  const [group, key] = name.split('.');
-  return (
-    <div className={styles.serviceCard}>
-      <Image src={src} alt={alt} className={styles.serviceImg} width={350} height={260} />
-      <div className={styles.serviceName}>
-        {homePageI18n?.[group]?.[key] || ""}
-        <div className={styles.serviceUnderline}></div>
-      </div>
-    </div>
-  );
-}
-
-function Carousel({ cards }: { cards: any[] }) {
-  const CARD_COUNT = 4;
-  const GAP_PERCENT = 2;
-  const TOTAL_GAP = GAP_PERCENT * (CARD_COUNT - 1);
-  const CARD_WIDTH = (100 - TOTAL_GAP) / CARD_COUNT;
-  const [startIdx, setStartIdx] = useState(0);
-  const allCards = [...cards, ...cards];
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStartIdx((prev) => (prev + 1) % cards.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [cards.length]);
-  return (
-    <div className={styles.servicesGrid}>
-      <div
-        className={styles.carouselTrack}
-        style={{
-          gap: '2%',
-          transform: `translateX(-${startIdx * (CARD_WIDTH + GAP_PERCENT)}%)`,
-          transition: "transform 0.7s cubic-bezier(0.23,1,0.32,1)",
-        }}
-      >
-        {allCards.map((card, idx) => (
-          <div
-            key={idx}
-            className={styles.carouselItem}
-            style={{ flex: `0 0 ${CARD_WIDTH}%`, maxWidth: `${CARD_WIDTH}%` }}
-          >
-            <ServiceCard src={card.src} alt={card.alt} name={card.name} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function CounterItem({ icon, number, label, visible }: { icon: string; number: number | string; label: string; visible: boolean }) {
-  const { t } = useTranslation('common');
-  const homePageI18n = t('homePage', { returnObjects: true }) as any;
-  // label ví dụ: "counter.experience"
-  const [group, key] = label.split('.');
-  return (
-    <div className={styles.counterItem}>
-      <div className={styles.counterIcon}>
-        <span className="material-symbols-outlined">{icon}</span>
-      </div>
-      <div className={styles.counterNumber}>
-        {visible ? <GlitchNumber targetValue={Number(number)} /> : number}
-      </div>
-      <div className={styles.counterLabel}>{homePageI18n?.[group]?.[key] || ""}</div>
-    </div>
-  );
-}
-
-function FeedbackUser({ avatar, name, stars = 5, content }: { avatar: string; name: string; stars?: number; content?: string }) {
-  const { t } = useTranslation('common');
-  const homePageI18n = t('homePage', { returnObjects: true }) as any;
-  const feedbackText = content ? homePageI18n[content] || "" : "";
-  return (
-    <div className={styles.feedbackUserContainer}>
-      <p className={styles.feedbackText}>{feedbackText}</p>
-      <div className={styles.feedbackUser}>
-        <img src={avatar} alt={name} className={styles.feedbackAvatar} />
-        <div>
-          <div className={styles.feedbackUserName}>{name}</div>
-          <div className={styles.feedbackUserStars}>
-            <StarRating score={stars} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function FeedbackSlider() {
-  const [current, setCurrent] = useState(0);
-  const [fade, setFade] = useState(true);
-  const total = feedbackUsers.length;
-  useEffect(() => {
-    const timer = setTimeout(() => handleNext(), 3000);
-    return () => clearTimeout(timer);
-  }, [current]);
-  const handleChange = (nextIdx: number) => {
-    setFade(false);
-    setTimeout(() => {
-      setCurrent(nextIdx);
-      setFade(true);
-    }, 300);
-  };
-  const handlePrev = () => handleChange((current - 1 + total) % total);
-  const handleNext = () => handleChange((current + 1) % total);
-  return (
-    <div style={{ position: "relative", minHeight: 220 }}>
-      <div
-        style={{
-          opacity: fade ? 1 : 0,
-          transition: "opacity 0.3s cubic-bezier(0.23,1,0.32,1)",
-          willChange: "opacity",
-        }}
-      >
-        <FeedbackUser {...feedbackUsers[current]} />
-      </div>
-      <div className={styles.feedbackNav}>
-        <button className={styles.feedbackNavBtn} onClick={handlePrev}>←</button>
-        <button className={styles.feedbackNavBtn} onClick={handleNext}>→</button>
-      </div>
-    </div>
-  );
-}
-
-function PricingCard({ plan }: { plan: typeof pricingPlans[0] }) {
-  const { t } = useTranslation('common');
-  const homePageI18n = t('homePage', { returnObjects: true }) as any;
-  // plan.name ví dụ: "pricing.basic"
-  const [group, key] = plan.name.split('.');
-  return (
-    <div className={styles.pricingCard}>
-      <div className={styles.pricingIcon}>
-        <span className="material-symbols-outlined" style={{ fontSize: 32, color: "#FF4D30" }}>{plan.icon}</span>
-      </div>
-      <div className={styles.pricingName}>{homePageI18n?.[group]?.[key] || ""}</div>
-      <div className={styles.pricingPrice}>
-        ${plan.price} <span className={styles.pricingPeriod}>{plan.period}</span>
-      </div>
-      <div className={styles.pricingSub}>{homePageI18n?.[group]?.sub || ""}</div>
-      <hr className={styles.pricingDivider} />
-      <ul className={styles.pricingList}>
-        {plan.features.map((f, i) => {
-          const [fGroup, fKey] = f.text.split('.');
-          return (
-            <li key={i} className={!f.included ? styles.pricingLineThrough : ""}>
-              <span className={styles.pricingCheck}>✓</span> {homePageI18n?.[fGroup]?.[fKey] || ""}
-            </li>
-          );
-        })}
-      </ul>
-      <ButtonV2 label={homePageI18n?.pricing?.choose || ""} className={styles.pricingBtn}/>
-    </div>
-  );
-}
-
-// ---------- Main Page ----------
 
 export default function HomePage() {
-  const { t } = useTranslation('common');
-  const homePageI18n = t('homePage', { returnObjects: true }) as any;
+  const { t } = useTranslation("common");
+  const homePageI18n = t("homePage", { returnObjects: true }) as any;
   const router = useRouter();
   const aboutRef = useRef<any>(null);
   const counterRef = useRef<any>(null);
   const aboutVisible = useSectionVisible(aboutRef, 0.2);
   const counterVisible = useSectionVisible(counterRef, 0.3);
   const [showVideo, setShowVideo] = useState(false);
+  const allCards = [...serviceCards, ...serviceCards];
 
   return (
     <>
       {/* Home Section */}
-      <section className={styles.home}>
-        <Image src={bgHome} alt="Home Banner" fill className={styles.homeBg} style={{ objectFit: "cover" }} priority />
-        <div className={styles.homeOverlay} />
-        <aside className={styles.homeLeftBar}>
-          <span className={styles.homeLeftBarText}>{homePageI18n.home.leftBarText}</span>
-          <span className={styles.homeLeftBarIcon}>
-            <span className="material-symbols-outlined">mail</span>
-          </span>
-        </aside>
-        <div className={styles.homeContent}>
-          <h1 className={styles.homeTitleWhite}>{homePageI18n.home.titleWhite}</h1>
-          <h1 className={styles.homeTitleOrange}>{homePageI18n.home.titleOrange}</h1>
-          <p className={styles.homeDesc}>
-            {homePageI18n.home.desc}
-          </p>
-          <div className={styles.btnHomeSection} onClick={() => router.push("/services")}>
-            <span className={styles.exploreCircle}>
-              <span className="material-symbols-outlined">arrow_forward</span>
-            </span>
-            <div className={styles.exploreText}>{homePageI18n.home.explore}</div>
+      <section
+        className="p-0 bg-img cover-background full-screen banner-style01 left-overlay-secondary"
+        data-overlay-dark="95"
+        style={{
+          backgroundImage: `url(/images/bg-home.jpg)`,
+        }}
+      >
+        <div className="container d-flex flex-column position-relative z-index-9">
+          <div className="row align-items-center min-vh-100">
+            <div className="col-lg-10 col-xl-8 col-xxl-7 mt-5 mt-sm-0">
+              <div className="section-title01">
+                <h1
+                  className="display-1 font-weight-800 text-shadow text-white ls-minus-2px lh-1 wow fadeInUp"
+                  data-wow-delay="200ms"
+                >
+                  <FadeInSection>
+                    <span>Fast and Safe </span>
+                    <span className="text-primary">Transportation.</span>
+                  </FadeInSection>
+                </h1>
+                <FadeInSection transition={{ duration: 1.2 }}>
+                  <p
+                    className="w-80 w-lg-70 font-weight-500 display-27 mb-4 text-white opacity5 d-none d-sm-block wow fadeInUp"
+                    data-wow-delay="350ms"
+                  >
+                    We pride ourselves on providing the best transport services
+                    currently available allover the world.
+                  </p>
+                </FadeInSection>
+              </div>
+              <div
+                className="banner-button wow fadeInUp"
+                data-wow-delay="500ms"
+              >
+                <FadeInSection
+                  className="d-flex align-items-center"
+                  transition={{ duration: 1.8 }}
+                >
+                  <span className="button-arrow">
+                    <span className="material-symbols-outlined">
+                      arrow_forward
+                    </span>
+                  </span>
+                  <div className="button-text">
+                    <span className="text-white text-primary-hover">
+                      Explore services
+                    </span>
+                  </div>
+                </FadeInSection>
+              </div>
+            </div>
           </div>
+        </div>
+        <div className="left-text d-none d-xxl-block">
+          <span className="d-flex align-items-center justify-content-center gap-2">
+            <span className="material-symbols-outlined">mail</span>
+            Get our service - Send a message
+          </span>
         </div>
       </section>
 
-      {/* About Section */}
-      <Section className={styles.aboutSection} visibleRef={aboutRef} showClass={styles.show}>
-        <div className={styles.aboutImages}>
-          <div className={styles.aboutImgLeft}>
-            <Image src={about01} alt="Truck" width={360} height={440} className={styles.aboutImg} />
-          </div>
-          <div className={styles.aboutImgRight}>
-            <Image src={about02} alt="Warehouse" width={360} height={440} className={styles.aboutImg} />
-          </div>
-        </div>
-        <div className={styles.aboutContent}>
-          <h2>
-            <span className={styles.aboutTitleBold}>{homePageI18n.about.titleBold}</span>
-            <span className={styles.aboutTitleColor}>{homePageI18n.about.titleColor}</span>
-          </h2>
-          <p className={styles.aboutDesc}>
-            {homePageI18n.about.desc}
-          </p>
-          <div className={styles.aboutActions}>
-            <ButtonV2 label={homePageI18n.about.more} />
-            <a className={styles.aboutBtnLink} href="#">{homePageI18n.about.discover}</a>
-          </div>
-          <div className={styles.aboutRating}>
-            <span className={styles.aboutScore}>
-              {aboutVisible ? <GlitchNumber targetValue={4.6} /> : "0.0"}
-            </span>
-            <span className={styles.aboutStars}>
-              <StarRating score={5} />
-            </span>
-            <span className={styles.aboutReview}>
-              {aboutVisible ? <GlitchNumber targetValue={262} duration={2000} stepTime={50} /> : ""} {homePageI18n.about.genuine}
-            </span>
+      {/* <!-- ABOUT US ================================================== --> */}
+      <Section
+        className="about-style01"
+        visibleRef={aboutRef}
+        showClass="showSection"
+      >
+        <div className="container">
+          <div className="row align-items-center">
+            <div
+              className="col-lg-6 mb-2-6 mb-sm-12 mb-lg-0 wow fadeInUp"
+              data-wow-delay="200ms"
+            >
+              <FadeInSection>
+                <div className="position-relative">
+                  <Image src={about01} alt="" />
+                  <div className="left-img d-none d-sm-block">
+                    <Image src={about02} alt="" />
+                  </div>
+                </div>
+              </FadeInSection>
+            </div>
+            <div className="col-lg-5 offset-lg-1">
+              <div
+                className="section-title01 mb-md-1-6 wow fadeInUp"
+                data-wow-delay="200ms"
+              >
+                <FadeInSection>
+                  <h2 className="display-5 font-weight-800 mb-md-0">
+                    <span>About</span>
+                    <span className="text-primary">Company</span>
+                  </h2>
+                </FadeInSection>
+              </div>
+              <FadeInSection transition={{ duration: 1.2 }}>
+                <p
+                  className="mb-1-9 w-xl-80 wow fadeInUp"
+                  data-wow-delay="350ms"
+                >
+                  We pride ourselves on providing the best transport and
+                  shipping services available allover the world. Our skilled
+                  personnel.
+                </p>
+              </FadeInSection>
+              <FadeInSection transition={{ duration: 2 }}>
+                <div
+                  className="mb-2 mb-sm-5 d-sm-flex align-items-center wow fadeInUp"
+                  data-wow-delay="500ms"
+                >
+                  <a
+                    href="https://kargonhtml.websitelayout.net/about.html"
+                    className="butn-style2 me-1-6 mb-3 mb-sm-0"
+                  >
+                    More About Us
+                  </a>
+                  <div className="button-text mb-3 mb-sm-0 d-block d-sm-inline-block">
+                    <a
+                      href="https://kargonhtml.websitelayout.net/about.html"
+                      className="text-secondary text-primary-hover"
+                    >
+                      Discover More
+                    </a>
+                  </div>
+                </div>
+                <div className="row align-items-center">
+                  <div
+                    className="col-sm-4 col-md-3 col-lg-6 col-xl-4 wow fadeInUp"
+                    data-wow-delay="650ms"
+                  >
+                    <div className="mb-0 text-start text-sm-center border-sm-end mb-3 mb-sm-0">
+                      <div className="display-2 font-weight-800 mb-0 text-secondary">
+                        <div className="odometer odometer-auto-theme">
+                          {aboutVisible ? (
+                            <GlitchNumber targetValue={4.6} />
+                          ) : (
+                            "0.0"
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="col-sm-6 col-xl-7 wow fadeInUp"
+                    data-wow-delay="800ms"
+                  >
+                    <div className="ms-sm-2">
+                      <StarRating score={5} />
+                      <div className="display-28 font-weight-500">
+                        <div className="odometer odometer-auto-theme">
+                          {aboutVisible ? (
+                            <GlitchNumber
+                              targetValue={262}
+                              duration={2000}
+                              stepTime={50}
+                            />
+                          ) : (
+                            "0.0"
+                          )}
+                        </div>
+                        + Genuine Ratings
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </FadeInSection>
+            </div>
           </div>
         </div>
       </Section>
 
-      {/* Services Section */}
-      <section className={styles.servicesSection}>
-        <h2 className={styles.servicesTitle}>
-          {homePageI18n.services.title} <span className={styles.servicesTitleAccent}>{homePageI18n.services.accent}</span>
-        </h2>
-        <Carousel cards={serviceCards} />
-      </section>
-
-      {/* Counter Section */}
-      <section className={styles.counterSection} ref={counterRef}>
-        <div className={styles.counterBg} />
-        <div className={styles.counterGrid}>
-          {counterData.map((item, idx) => (
-            <CounterItem key={idx} {...item} visible={counterVisible} />
-          ))}
+      {/* <!-- SERVICES================================================== --> */}
+      <section>
+        <div className="processHeader">
+          <h2>
+            <span>Logistics </span>
+            <span className="text-primary">Service</span>
+          </h2>
+        </div>
+        <div className="processSliderWrapper">
+          <div className="processSlider">
+            {allCards.map((card, idx) => (
+              <ServiceCard
+                src={card.src}
+                alt={card.alt}
+                name={card.name}
+                key={idx}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Feedback Section */}
-      <section className={styles.feedbackSection}>
-        <div className={styles.feedbackContainer}>
-          <div className={styles.feedbackLeft}>
-            <Image src={feedback01} alt="Customer Feedback" className={styles.feedbackImage} width={200} height={400} priority />
-            <div className={styles.feedbackScoreCard}>
-              <div className={styles.feedbackScore}>4.28</div>
-              <div className={styles.feedbackStars}>★★★★★</div>
-              <div className={styles.feedbackReviews}>2467 {homePageI18n.feedback.reviews}</div>
-              <div className={styles.feedbackExcellent}>{homePageI18n.feedback.excellent}</div>
-              <div className={styles.feedbackBrand}>Hipster</div>
+      {/* <!-- COUNTER ================================================== --> */}
+      <section
+        className="bg-img cover-background secondary-overlay"
+        data-overlay-dark="8"
+        data-background="https://kargonhtml.websitelayout.net/img/bg/bg-06.jpg"
+        ref={counterRef}
+      >
+        <div className="container">
+          <div className="row mt-n1-9">
+            {counterData.map((item, idx) => (
+              <CounterItem
+                key={idx}
+                icon={item.icon}
+                value={item.value}
+                label={item.label}
+                visible={counterVisible}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* <!-- TESTIMONIALS ================================================== --> */}
+      <section className="testimonials-style01">
+        <div className="container">
+          <div className="row align-items-xxl-center position-relative z-index-9 mt-n1-9">
+            <div className="col-lg-6 mt-1-9">
+              <div className="ps-xl-14 position-relative">
+                <img
+                  src="https://kargonhtml.websitelayout.net/img/content/testimonial-01.jpg"
+                  alt="..."
+                />
+                <div className="left-box d-none d-sm-block">
+                  <div className="inner-box">
+                    <h1>4.28</h1>
+                    <div className="d-flex align-items-center justify-content-center">
+                      <StarRating score={4.5} />
+                    </div>
+                    <span className="text-dark font-weight-700 lh-lg">
+                      2467 Reviews
+                    </span>
+                    <div className="box-tag">Excellent score</div>
+                  </div>
+                  <img
+                    src="https://kargonhtml.websitelayout.net/img/clients/11.png"
+                    alt="..."
+                    className="mb-4"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-5 offset-lg-1 mt-1-9">
+              <FadeInSection>
+                <div className="section-title01 mb-1-6 mb-md-2-6">
+                  <h2 className="display-5 font-weight-800 mb-md-0">
+                    <span>Customers</span>
+                    <span className="text-primary">Feedback</span>
+                  </h2>
+                </div>
+                <TestimonialCarousel />
+              </FadeInSection>
             </div>
           </div>
-          <div className={styles.feedbackRight}>
-            <h2 className={styles.feedbackTitle}>
-              {homePageI18n.feedback.title} <span className={styles.feedbackAccent}>{homePageI18n.feedback.accent}</span>
-            </h2>
-            <FeedbackSlider />
+        </div>
+      </section>
+
+      {/* <!-- WHY CHOOSE US ================================================== --> */}
+      <section className="py-0 why-choose-style2">
+        <div className="container-fluid p-0">
+          <div className="row g-0">
+            <div className="col-lg-6 col-xl-7 d-none d-lg-block">
+              <div
+                className="bg-img cover-background h-100 overflow-visible"
+                style={{
+                  backgroundImage: `url(https://kargonhtml.websitelayout.net/img/content/why-choose-us-02.jpg)`,
+                }}
+              >
+                <div className="story-video position-absolute top-50 start-100 translate-middle d-none d-lg-block">
+                  <a
+                    className="video"
+                    href="https://www.youtube.com/watch?v=KEFt2quibkg"
+                  >
+                    <IoIosPlay fontSize={50} />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-6 col-xl-5">
+              <div className="right-content">
+                <div
+                  className="section-title01 mb-1-6 mb-md-2-6 wow fadeInUp"
+                  data-wow-delay="200ms"
+                >
+                  <h2 className="display-5 font-weight-800 mb-md-0">
+                    <span>Why You</span>
+                    <span className="text-primary">Choose Us</span>
+                  </h2>
+                </div>
+                <p
+                  className="w-lg-95 mb-1-9 mb-md-2-2 wow fadeInUp"
+                  data-wow-delay="350ms"
+                >
+                  You can know the price for your transportation in advance. We
+                  offers intellgent concepts for road and tail and well as
+                  complex special transport services.We provide excellent
+                  service across the country.
+                </p>
+                <ul
+                  className="list-unstyled list-style9 mb-2-1 mb-md-2-8 wow fadeInUp"
+                  data-wow-delay="500ms"
+                >
+                  <li>Supply Chain Solutions.</li>
+                  <li> End-to-End Transportation.</li>
+                  <li>Warehousing & Distribution.</li>
+                </ul>
+                <div className="wow fadeInUp" data-wow-delay="650ms">
+                  <a
+                    href="https://kargonhtml.websitelayout.net/services.html"
+                    className="butn-style2"
+                  >
+                    View All Services
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section className={styles.chooseSection}>
-        <div className={styles.chooseContainer}>
-          <div className={styles.chooseLeft}>
-            <img
-              src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80"
-              alt="Driver with tablet"
-              className={styles.chooseImage}
-            />
-            <button className={styles.choosePlayBtn} onClick={() => setShowVideo(true)}>
-              <span className="material-symbols-outlined">play_arrow</span>
-            </button>
-          </div>
-          <div className={styles.chooseRight}>
-            <h2 className={styles.chooseTitle}>
-              {homePageI18n.choose.title} <span className={styles.chooseAccent}>{homePageI18n.choose.accent}</span>
+      {/* <!-- PRICING ================================================== --> */}
+      <section>
+        <div className="container">
+          <div
+            className="section-title01 mb-1-6 mb-md-2-6 text-center wow fadeInUp"
+            data-wow-delay="200ms"
+          >
+            <h2 className="display-5 font-weight-800 mb-md-0">
+              <span>Choose</span>
+              <span className="text-primary">Perfect Plan</span>
             </h2>
-            <p className={styles.chooseDesc}>
-              {homePageI18n.choose.desc}
-            </p>
-            <ul className={styles.chooseList}>
-              <li><span className={styles.chooseCheck}>✓</span> {homePageI18n.choose.l1}</li>
-              <li><span className={styles.chooseCheck}>✓</span> {homePageI18n.choose.l2}</li>
-              <li><span className={styles.chooseCheck}>✓</span> {homePageI18n.choose.l3}</li>
-            </ul>
-            <ButtonV2 label={homePageI18n.choose.viewAll} />
           </div>
-        </div>
-      </section>
-
-      {/* Video Popup */}
-      {showVideo && (
-        <div className={styles.videoPopupOverlay} onClick={() => setShowVideo(false)}>
-          <div className={styles.videoPopup} onClick={e => e.stopPropagation()}>
-            <button className={styles.videoPopupClose} onClick={() => setShowVideo(false)}>×</button>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/ScMzIvxBSi4"
-              title="YouTube video"
-              frameBorder="0"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              style={{ borderRadius: 12, width: "100%", height: 350 }}
-            ></iframe>
+          <div className="row g-lg-5 mt-n2-9">
+            {pricingData.map((plan, idx) => (
+              <PricingCard key={idx} {...plan} />
+            ))}
           </div>
-        </div>
-      )}
-
-      {/* Pricing Section */}
-      <section className={styles.pricingSection}>
-        <h2 className={styles.pricingTitle}>
-          {homePageI18n.pricing.title} <span className={styles.pricingAccent}>{homePageI18n.pricing.accent}</span>
-        </h2>
-        <div className={styles.pricingGrid}>
-          {pricingPlans.map((plan, idx) => (
-            <PricingCard plan={plan} key={idx} />
-          ))}
         </div>
       </section>
     </>

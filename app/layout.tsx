@@ -1,4 +1,4 @@
-'"use client";'
+'"use client";';
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -6,8 +6,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
 import { I18nProvider } from "./providers";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import "@/public/styles/styles.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import LanguageWrapper from "@/components/LanguageWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,8 +33,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+ const lang = "en";
   return (
-    <html lang="en">
+    <html lang={lang}>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
@@ -40,11 +46,22 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://www.w3schools.com/w3css/5/w3.css"
         ></link>
+
+        <link rel="stylesheet" href="./styles/plugins.css"></link>
+
+        <link rel="stylesheet" href="./styles/search.css"></link>
+
+        <link rel="stylesheet" href="./styles/base.css"></link>
+
+        <link rel="stylesheet" href="./styles/scrollbar.css"></link>
+
+        <link href="./styles/styles.css" rel="stylesheet"></link>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <I18nProvider>
+          <LanguageWrapper />
           <Header />
           {children}
           <Footer />

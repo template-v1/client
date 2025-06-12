@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "@/styles/ContacForm.module.css";
+import styles from "@/public/styles/ContacForm.module.css";
 import InputV2 from "@/components/ui/InputV2";
 import ButtonV2 from "@/components/ui/ButtonV2";
 

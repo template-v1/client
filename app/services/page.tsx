@@ -1,293 +1,328 @@
-'use client'
+"use client";
 
-import React, { useState, memo, Fragment } from 'react';
-import Image from 'next/image';
-import { useTranslation } from 'next-i18next';
-import bgContact from "@/public/images/bg-contact.jpg";
-import styles from "@/styles/Service.module.css";
+import React, { useState } from "react";
+import { useTranslation } from "next-i18next";
 import service01 from "@/public/images/service-01.jpg";
 import service02 from "@/public/images/service-02.jpg";
 import service03 from "@/public/images/service-03.jpg";
 import service04 from "@/public/images/service-04.jpg";
 import service05 from "@/public/images/service-05.jpg";
 import service06 from "@/public/images/service-06.jpg";
-import ContactForm from '@/components/ui/contactForm/ContactForm';
-import ButtonV2 from '@/components/ui/ButtonV2';
-
-type ServiceCardProps = {
-  image: any;
-  alt: string;
-  title: string;
-};
-
-const ServiceCard = memo(({ image, alt, title }: ServiceCardProps) => (
-  <div className={styles.serviceCard}>
-    <Image src={image} alt={alt} width={350} height={250} className={styles.serviceImg} />
-    <h3 className={styles.serviceName}><span>{title}</span></h3>
-  </div>
-));
+import { ServiceCard } from "@/components/ui/cards/ServiceCard";
+import PricingCard from "@/components/ui/cards/PricingCard";
+import ContactForm from "@/components/ui/contactForm/ContactForm";
+import FadeInSection from "@/components/FadeInSection";
 
 const services = [
-  { image: service01, key: "warehousing" },
-  { image: service02, key: "air" },
-  { image: service03, key: "ocean" },
-  { image: service04, key: "road" },
-  { image: service05, key: "rail" },
-  { image: service06, key: "solution" },
+  {
+    src: service01,
+    name: "Warehousing",
+    link: "/services/warehousing",
+  },
+  {
+    src: service02,
+    name: "Air Freight",
+    link: "/services/air-freight",
+  },
+  {
+    src: service03,
+    name: "Ocean Freight",
+    link: "/services/ocean-freight",
+  },
+  {
+    src: service04,
+    name: "Road Freight",
+    link: "/services/road-freight",
+  },
+  {
+    src: service05,
+    name: "Rail Freight",
+    link: "/services/rail-freight",
+  },
+  {
+    src: service06,
+    name: "Logistic Solution",
+    link: "/services/solution",
+  },
 ];
 
-type PricingCardProps = {
-  icon: React.ReactNode;
-  name: string;
-  price: string;
-  desc: string;
-  features: { text: string; strike?: boolean }[];
-};
+const pricing = [
+  {
+    iconUrl: "https://kargonhtml.websitelayout.net/img/icons/icon-1.png",
+    title: "Basic",
+    price: 149,
+    priceSuffix: "/ mo",
+    description: "Our best professional rates",
+    features: [
+      "1 Warehouse",
+      "Custom Business Rules",
+      "Realtime Rate Shopping",
+      <del key="d1">50 Freight Shipments</del>,
+      <del key="d2">Not Included Insurance</del>,
+    ],
+    buttonUrl: "https://kargonhtml.websitelayout.net/contact.html",
+    buttonText: "Choose Plans",
+    wowDelay: "200ms",
+  },
+  {
+    iconUrl: "https://kargonhtml.websitelayout.net/img/icons/icon-2.png",
+    title: "Premium",
+    price: 169,
+    priceSuffix: "/ mo",
+    description: "Our best professional rates",
+    features: [
+      "1 Warehouse",
+      "Custom Business Rules",
+      "Realtime Rate Shopping",
+      "75 Freight Shipments",
+      <del key="d1">Included Insurance</del>,
+    ],
+    buttonUrl: "https://kargonhtml.websitelayout.net/contact.html",
+    buttonText: "Choose Plans",
+    wowDelay: "350ms",
+  },
+  {
+    iconUrl: "https://kargonhtml.websitelayout.net/img/icons/icon-3.png",
+    title: "Gold",
+    price: 199,
+    priceSuffix: "/ mo",
+    description: "Our best professional rates",
+    features: [
+      "2 Warehouse",
+      "Custom Business Rules",
+      "Realtime Rate Shopping",
+      "10 Freight Shipments",
+      "Included Insurance",
+    ],
+    buttonUrl: "https://kargonhtml.websitelayout.net/contact.html",
+    buttonText: "Choose Plans",
+    wowDelay: "500ms",
+  },
+];
 
-const PricingCard = memo(({ icon, name, price, desc, features }: PricingCardProps) => (
-  <div className={styles.pricingCard}>
-    <div className={styles.pricingIcon}>{icon}</div>
-    <div className={styles.pricingName}>{name}</div>
-    <div className={styles.pricingPrice}>{price} <span>/mo</span></div>
-    <div className={styles.pricingDesc}>{desc}</div>
-    <hr className={styles.pricingDivider}/>
-    <ul className={styles.pricingList}>
-      {features.map((f, i) => (
-        <li key={i} className={f.strike ? styles.strike : ""}>
-          <span className={styles.check}>✓</span> {f.text}
-        </li>
-      ))}
-    </ul>
-    <ButtonV2
-      label={desc}
-      type="primary"
-      size="middle"
-      className={styles.pricingBtn}
-    />
-  </div>
-));
+const faqs = [
+  {
+    question: "Can I specify a delivery date when ordering?",
+    answer:
+      "We are committed to providing our customers with exceptional service while offering our employees the best training. There are many variations of passages of lorem ipsum is simply free text.",
+  },
+  {
+    question: "How can I track my shipments?",
+    answer:
+      "We are committed to providing our customers with exceptional service while offering our employees the best training. There are many variations of passages of lorem ipsum is simply free text.",
+  },
+  {
+    question: "What is included in your services?",
+    answer:
+      "We are committed to providing our customers with exceptional service while offering our employees the best training. There are many variations of passages of lorem ipsum is simply free text.",
+  },
+  {
+    question: "How can I safely use files?",
+    answer:
+      "We are committed to providing our customers with exceptional service while offering our employees the best training. There are many variations of passages of lorem ipsum is simply free text.",
+  },
+];
 
-type FAQ = { q: string; a: string };
-const FAQAccordion = memo(({ faqs }: { faqs: FAQ[] }) => {
-  const [openIdx, setOpenIdx] = useState<number>(-1);
-  return (
-    <div className={styles.faqAccordion}>
-      {faqs.map((faq, idx) => (
-        <div
-          className={`${styles.faqItem} ${openIdx === idx ? styles.faqOpen : ""}`}
-          key={idx}
-          onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
-        >
-          <div className={styles.faqQuestion}>
-            <span className={openIdx === idx ? styles.faqActive : ""}>{faq.q}</span>
-            <span className={styles.faqIcon}>{openIdx === idx ? "−" : "+"}</span>
-          </div>
-          {openIdx === idx && (
-            <div className={styles.faqAnswer}>{faq.a}</div>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-});
-
-const MultilineTitle = ({ text, ...props }: { text?: string } & React.HTMLAttributes<HTMLHeadingElement>) => (
-  <h2 {...props}>
-    {text?.split('\n').map((line, idx) => (
-      <Fragment key={idx}>
-        {line}
-        <br />
-      </Fragment>
-    ))}
-  </h2>
-);
+const processSteps = [
+  {
+    step: "01",
+    title: "Order Processing",
+    desc: "The logistics process begins with the receipt of customer...",
+  },
+  {
+    step: "02",
+    title: "Warehousing",
+    desc: "Goods that are ready for shipment are stored in warehouses or...",
+  },
+  {
+    step: "03",
+    title: "Order Tracking",
+    desc: "Real-time tracking systems are used to monitor the...",
+  },
+  {
+    step: "04",
+    title: "Product Delivery",
+    desc: "In the final stage of logistics services.",
+  },
+];
 
 const ServicePage = () => {
-  const { t } = useTranslation('common');
-  const servicePage = t('servicePage', { returnObjects: true }) as any;
-
-  const processSteps = servicePage.process?.steps || [];
-  const faqs = servicePage.faqContact?.faqs || [];
+  const { t } = useTranslation("common");
+  const [openIdx, setOpenIdx] = useState<number>(0);
 
   return (
     <div>
-      {/* Banner */}
-      <div className={styles.banner}>
-        <Image
-          src={bgContact}
-          alt="Contact Banner"
-          className={styles.bannerImg}
-          fill
-          style={{ objectFit: "cover" }}
-          priority
-        />
-        <div className={styles.bannerOverlay}>
-          <div className={styles.bannerContent}>
-            <h1 className={styles.bannerTitle}>{servicePage.banner?.title}</h1>
-            <div className={styles.breadcrumb}>
-              <span>{servicePage.banner?.breadcrumbHome}</span>
-              <span className={styles.breadcrumbDivider}></span>
-              <span className={styles.breadcrumbCurrent}>{servicePage.banner?.breadcrumbCurrent}</span>
+      {/* PAGE TITLE */}
+      <section
+        className="page-title-section bg-img cover-background left-overlay-secondary"
+        data-overlay-dark="9"
+        data-background="https://kargonhtml.websitelayout.net/img/bg/bg-01.jpg"
+        style={{
+          backgroundImage: `url(/images/bg-contact.jpg)`,
+        }}
+      >
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="text-start">
+                <div className="position-relative">
+                  <h1>Services</h1>
+                </div>
+                <ul>
+                  <li>
+                    <a href="/">Home</a>
+                  </li>
+                  <li>
+                    <a href="#">Services</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Services Section */}
-      <section className={styles.servicesSection}>
-        <div className={styles.servicesHeader}>
-          <span className={styles.servicesSubtitle}>{servicePage.services?.subtitle}</span>
-          <h2 className={styles.servicesTitle}>{servicePage.services?.title}</h2>
-        </div>
-        <div className="row g-4">
-          {services.map((service) => (
-            <div className="col-12 col-md-4" key={service.key}>
-              <ServiceCard
-                image={service.image}
-                alt={t(`servicePage.services.list.${service.key}`)}
-                title={t(`servicePage.services.list.${service.key}`)}
-              />
+      {/* SERVICES */}
+      <section>
+        <div className="container">
+          <FadeInSection>
+            <div className="mb-1-9 mb-md-5 text-center">
+              <span className="text-primary display-30 pb-3 text-uppercase lh-1 font-weight-700 mb-1 d-block">
+                01 _ Our Services
+              </span>
+              <h2 className="ls-minus-2px display-5 font-weight-800 lh-1 mb-0">
+                Logistics services
+              </h2>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Call To Action Section */}
-      <section className={styles.ctaSection}>
-        <Image
-          src={bgContact}
-          alt="Logistics CTA"
-          fill
-          className={styles.ctaBg}
-          style={{ objectFit: "cover" }}
-        />
-        <div className={styles.ctaOverlay}>
-          <MultilineTitle text={servicePage.cta?.title} className={styles.ctaTitle} />
-          <ButtonV2
-            label={servicePage.cta?.button}
-            type="primary"
-            size="large"
-            className={styles.ctaButton}
-          />
-        </div>
-      </section>
-      
-      {/* Process Steps Section */}
-      <section className={styles.processSection}>
-        <div className={styles.processHeader}>
-          <span className={styles.processSubtitle}>{servicePage.process?.subtitle}</span>
-          <h2 className={styles.processTitle}>{servicePage.process?.title}</h2>
-        </div>
-        <div className={styles.processSliderWrapper}>
-          <div className={styles.processSlider}>
-            {[...processSteps, ...processSteps].map((item: any, idx: number) => (
-              <div className={styles.processStep} key={idx + '-' + item.step}>
-                <div className={styles.processStepTop}>
-                  <span className={styles.processStepLabel}>Step {item.step}</span>
-                  <span className={styles.processStepDot}></span>
-                </div>
-                <div className={styles.processStepNum}>{item.step}</div>
-                <div className={styles.processStepTitle}>{item.title}</div>
-                <div className={styles.processStepDesc}>{item.desc}</div>
+          </FadeInSection>
+          <div className="row mt-n2-9">
+            {services.map((s, idx) => (
+              <div className="col-lg-4 mt-2-9" key={idx}>
+                <ServiceCard src={s.src} alt={s.name} name={s.name} />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className={styles.pricingSection}>
+      {/* EXTRA */}
+      <section
+        className="bg-img cover-background secondary-overlay"
+        data-overlay-dark="85"
+        data-background="https://kargonhtml.websitelayout.net/img/bg/bg-07.jpg"
+      >
         <div className="container">
-          <div className={styles.pricingHeader}>
-            <span className={styles.pricingSubtitle}>{servicePage.pricing?.subtitle}</span>
-            <h2 className={styles.pricingTitle}>{servicePage.pricing?.title}</h2>
-          </div>
-          <div className="row g-4 justify-content-center">
-            <div className="col-12 col-md-6 col-lg-4 d-flex">
-              <div className="w-100">
-                <PricingCard
-                  icon={
-                    <svg width="48" height="48" fill="none"><circle cx="24" cy="24" r="22" stroke="#FF4D30" strokeWidth="2"/><path d="M24 32l-7.5 4 1.5-8.5-6-5.5 8.5-1 3.5-8 3.5 8 8.5 1-6 5.5 1.5 8.5-7.5-4z" stroke="#FF4D30" strokeWidth="2" strokeLinejoin="round"/></svg>
-                  }
-                  name={servicePage.pricing?.plans?.basic}
-                  price="$149"
-                  desc={servicePage.pricing?.desc}
-                  features={[
-                    { text: servicePage.pricing?.features?.warehouse1 },
-                    { text: servicePage.pricing?.features?.customRules },
-                    { text: servicePage.pricing?.features?.realtimeRate },
-                    { text: servicePage.pricing?.features?.freight50, strike: true },
-                    { text: servicePage.pricing?.features?.insuranceNotIncluded, strike: true },
-                  ]}
-                />
-              </div>
-            </div>
-            <div className="col-12 col-md-6 col-lg-4 d-flex">
-              <div className="w-100">
-                <PricingCard
-                  icon={
-                    <svg width="48" height="48" fill="none"><circle cx="24" cy="24" r="22" stroke="#FF4D30" strokeWidth="2"/><path d="M24 32l-7.5 4 1.5-8.5-6-5.5 8.5-1 3.5-8 3.5 8 8.5 1-6 5.5 1.5 8.5-7.5-4z" stroke="#FF4D30" strokeWidth="2" strokeLinejoin="round"/><rect x="16" y="12" width="16" height="8" rx="4" stroke="#FF4D30" strokeWidth="2"/></svg>
-                  }
-                  name={servicePage.pricing?.plans?.premium}
-                  price="$169"
-                  desc={servicePage.pricing?.desc}
-                  features={[
-                    { text: servicePage.pricing?.features?.warehouse1 },
-                    { text: servicePage.pricing?.features?.customRules },
-                    { text: servicePage.pricing?.features?.realtimeRate },
-                    { text: servicePage.pricing?.features?.freight75 },
-                    { text: servicePage.pricing?.features?.insuranceIncluded, strike: true },
-                  ]}
-                />
-              </div>
-            </div>
-            <div className="col-12 col-md-6 col-lg-4 d-flex">
-              <div className="w-100">
-                <PricingCard
-                  icon={
-                    <svg width="48" height="48" fill="none"><circle cx="24" cy="24" r="22" stroke="#FF4D30" strokeWidth="2"/><path d="M24 32l-7.5 4 1.5-8.5-6-5.5 8.5-1 3.5-8 3.5 8 8.5 1-6 5.5 1.5 8.5-7.5-4z" stroke="#FF4D30" strokeWidth="2" strokeLinejoin="round"/><path d="M24 12a12 12 0 0112 12" stroke="#FF4D30" strokeWidth="2"/></svg>
-                  }
-                  name={servicePage.pricing?.plans?.gold}
-                  price="$199"
-                  desc={servicePage.pricing?.desc}
-                  features={[
-                    { text: servicePage.pricing?.features?.warehouse2 },
-                    { text: servicePage.pricing?.features?.customRules },
-                    { text: servicePage.pricing?.features?.realtimeRate },
-                    { text: servicePage.pricing?.features?.freight10 },
-                    { text: servicePage.pricing?.features?.insuranceIncluded },
-                  ]}
-                />
-              </div>
+          <div className="row text-center justify-content-center">
+            <div className="col-lg-11 col-xxl-9">
+              <FadeInSection>
+                <h2 className="display-4 font-weight-800 lh-1 mb-1-9 mb-md-5 text-white">
+                  Looking for the best logistics transport service?
+                </h2>
+                <a href="/contact" className="butn-style3">
+                  <span>Contact Us</span>
+                </a>
+              </FadeInSection>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ & Contact Section */}
-      <section className={styles.expertSection} style={{ background: "#f7f9fa", padding: "64px 0" }}>
+      {/* PROCESS */}
+      <section className="bg-light">
         <div className="container">
-          <div className="row g-4">
-            {/* FAQ */}
-            <div className="col-12 col-md-6">
-              <span style={{ color: "#FF4D30", fontWeight: 700, fontSize: "1rem", letterSpacing: 1 }}>
-                {servicePage.faqContact?.subtitle}
-              </span>
-              <MultilineTitle
-                text={servicePage.faqContact?.title}
-                style={{
-                  fontSize: "2.8rem",
-                  fontWeight: 800,
-                  color: "#183153",
-                  margin: "16px 0 32px 0",
-                  lineHeight: 1.1,
-                }}
-              />
-              <FAQAccordion faqs={faqs} />
+          <div className="mb-1-9 mb-md-5 text-center">
+            <span className="text-primary display-30 pb-3 text-uppercase lh-1 font-weight-700 mb-1 d-block">
+              02 _ Our Process
+            </span>
+            <h2 className="ls-minus-2px display-5 font-weight-800 lh-1 mb-0 w-sm-80 w-md-70 w-md-60 w-lg-50 w-xl-40 mx-auto">
+              Easy steps to receive your cargo
+            </h2>
+          </div>
+          <div className="processSliderV2">
+            <div className="slider-track">
+              {[...processSteps, ...processSteps].map((step, idx) => (
+                <div className="slider-item" key={idx}>
+                  <div className="process-style01 text-center mb-4">
+                    <span>Step {step.step}</span>
+                    <h5 className="process-no">{step.step}</h5>
+                    <h3 className="h5">{step.title}</h3>
+                    <p className="w-90 mx-auto mb-0">{step.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-            {/* Contact Form */}
-            <div className="col-12 col-md-6">
-              <ContactForm />
+          </div>
+        </div>
+      </section>
+
+      {/* <!-- PRICING ================================================== --> */}
+      <section>
+        <div className="container">
+          <div
+            className="section-title01 mb-1-6 mb-md-2-6 text-center wow fadeInUp"
+            data-wow-delay="200ms"
+          >
+            <h2 className="display-5 font-weight-800 mb-md-0">
+              <span>Choose</span>
+              <span className="text-primary">Perfect Plan</span>
+            </h2>
+          </div>
+          <div className="row g-lg-5 mt-n2-9">
+            {pricing.map((plan, idx) => (
+              <PricingCard key={idx} {...plan} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ & CONTACT */}
+      <section className="position-relative bg-light">
+        <div className="container">
+          <div className="row mt-n1-9">
+            <div className="col-lg-7 mt-1-9">
+              <div className="pe-xl-6">
+                <FadeInSection>
+                  <div className="mb-1-9 mb-md-5">
+                    <span className="text-primary display-30 pb-3 text-uppercase lh-1 font-weight-700 mb-1 d-block">
+                      04 _ Experts in Technology Fields
+                    </span>
+                    <h2 className="ls-minus-2px display-5 font-weight-800 lh-1 mb-0">
+                      Leading global logistic and transport agency
+                    </h2>
+                  </div>
+                  <div id="accordion" className="accordion-style">
+                    {faqs.map((faq, idx) => (
+                      <div
+                        className="card mb-4"
+                        key={idx}
+                        onClick={() => setOpenIdx(openIdx === idx ? -1 : idx)}
+                      >
+                        <h5 className="mb-0">
+                          <button
+                            className={`btn btn-link${
+                              openIdx === idx ? "" : " collapsed"
+                            }`}
+                            data-bs-toggle="collapse"
+                            data-bs-target={`#collapse${idx}`}
+                            aria-expanded={idx === 0}
+                            aria-controls={`collapse${idx}`}
+                          >
+                            {faq.question}
+                          </button>
+                        </h5>
+                        {openIdx === idx && (
+                          <div className="card-body">{faq.answer}</div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </FadeInSection>
+              </div>
+            </div>
+            <div className="col-lg-5 mt-1-9">
+              <FadeInSection transition={{ duration: 1.2 }}>
+                <ContactForm />
+              </FadeInSection>
             </div>
           </div>
         </div>

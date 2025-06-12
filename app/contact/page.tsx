@@ -1,141 +1,177 @@
-'use client';
+"use client";
 
-import React from "react";
-import Image from "next/image";
-import bgContact from "@/public/images/bg-contact.jpg";
 import ContactForm from "@/components/ui/contactForm/ContactForm";
-import { FaLocationDot, FaPhone, FaFacebookF, FaXTwitter, FaYoutube, FaLinkedinIn } from "react-icons/fa6";
+import {
+  FaFacebookF,
+  FaLinkedinIn,
+  FaXTwitter,
+  FaYoutube,
+  FaPhone,
+} from "react-icons/fa6";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import styles from "@/styles/Contact.module.css";
 
-// Common SocialIcon component
-const SocialIcon = ({ type, href }: { type: string; href: string }) => {
-  const iconProps = { size: 28 };
-  let IconComp = null;
-  switch (type) {
-    case "facebook":
-      IconComp = FaFacebookF;
-      break;
-    case "twitter":
-      IconComp = FaXTwitter;
-      break;
-    case "youtube":
-      IconComp = FaYoutube;
-      break;
-    case "linkedin":
-      IconComp = FaLinkedinIn;
-      break;
-    default:
-      return null;
-  }
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
-      <IconComp {...iconProps} />
-    </a>
-  );
-};
-
-// Common DetailItem component
-const DetailItem = ({
-  icon,
-  label,
-  children,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  children: React.ReactNode;
-}) => (
-  <div className="d-flex align-items-center gap-3 mb-3">
-    <div className={styles.detailIcon}>{icon}</div>
-    <div>
-      <div className={styles.detailLabel}>{label}</div>
-      {children}
-    </div>
-  </div>
-);
-
-const contactDetail = {
-  title: "Our contact detail",
-  desc: "Need any consultations contact with us",
-  phones: ["+1(888) 123-5678", "(+44)123 456 789"],
-  emails: ["info@example.com", "contact@example.com"],
-  location: "Guild Street 51, North Town,\nLondon-06192, UK",
-  socials: [
-    { type: "facebook", href: "#" },
-    { type: "twitter", href: "#" },
-    { type: "youtube", href: "#" },
-    { type: "linkedin", href: "#" },
-  ],
-};
+const socials = [
+  { type: "facebook", href: "#", icon: <FaFacebookF /> },
+  { type: "twitter", href: "#", icon: <FaXTwitter /> },
+  { type: "youtube", href: "#", icon: <FaYoutube /> },
+  { type: "linkedin", href: "#", icon: <FaLinkedinIn /> },
+];
 
 export default function ContactPage() {
   return (
     <div>
-      {/* Banner */}
-      <div className={styles.banner}>
-        <Image
-          src={bgContact}
-          alt="Contact Banner"
-          className={styles.bannerImg}
-          fill
-          style={{ objectFit: "cover" }}
-          priority
-        />
-        <div className={styles.bannerOverlay}>
-          <div className="container py-4 px-4 px-md-5">
-            <div className={`${styles.bannerContent} text-center text-md-start`}>
-              <h1 className={styles.bannerTitle}>Contact Us</h1>
-              <div className={`d-flex align-items-center gap-2 gap-md-3 justify-content-center justify-content-md-start ${styles.breadcrumb}`}>
-                <span>Home</span>
-                <span className={styles.breadcrumbDivider}></span>
-                <span className={styles.breadcrumbCurrent}>Contact Us</span>
+      {/* Banner Section */}
+      <section
+        className="page-title-section bg-img cover-background left-overlay-secondary"
+        data-overlay-dark="9"
+        style={{
+          backgroundImage: `url(/images/bg-contact.jpg)`,
+        }}
+      >
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="text-start">
+                <h1 className="fw-bold text-white mb-3">Contact Us</h1>
+                <ul className="list-inline mb-0">
+                  <li className="list-inline-item">
+                    <a href="/" className="text-white text-decoration-none">
+                      Home
+                    </a>
+                  </li>
+                  <li className="list-inline-item text-white">/</li>
+                  <li className="list-inline-item text-white-50">Contact Us</li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Main Content */}
-      <div className="container py-5">
-        <div className="row g-4 justify-content-center">
-          {/* Form */}
-          <div className="col-12 col-lg-6">
-            {/* <div className="bg-white rounded-4 shadow-sm p-4 h-100"> */}
-              <ContactForm />
-            {/* </div> */}
-          </div>
-          {/* Contact Detail */}
-          <div className="col-12 col-lg-6">
-            <div className={`${styles.detailSection} rounded-4 h-100 position-relative p-4 p-lg-5`}>
-              <h3 className={styles.detailTitle}>{contactDetail.title}</h3>
-              <p className={styles.detailDesc}>{contactDetail.desc}</p>
-              <DetailItem icon={<FaPhone color="#FF4D30" />} label="Phone Number">
-                {contactDetail.phones.map((phone) => (
-                  <div key={phone}>{phone}</div>
-                ))}
-              </DetailItem>
-              <DetailItem icon={<MdEmail color="#FF4D30" />} label="Email Address">
-                {contactDetail.emails.map((email) => (
-                  <div key={email}>{email}</div>
-                ))}
-              </DetailItem>
-              <DetailItem icon={<FaLocationDot color="#FF4D30" />} label="Location">
-                <div>
-                  {contactDetail.location.split('\n').map((line, i) => (
-                    <React.Fragment key={i}>{line}<br /></React.Fragment>
-                  ))}
+      {/* Contact Section */}
+      <section>
+        <div className="container py-5">
+          <div className="row g-0">
+            {/* Form */}
+            <div className="col-lg-7">
+              <div className="bg-white rounded-4 shadow-sm p-4 h-100">
+                <div className="mb-4">
+                  <span
+                    className="text-uppercase fw-bold"
+                    style={{ color: "#f94735", fontSize: 14 }}
+                  >
+                    01 _ contact
+                  </span>
+                  <h2 className="fw-bold mb-0" style={{ fontSize: 32 }}>
+                    Get in touch
+                  </h2>
                 </div>
-              </DetailItem>
-              <div className={`d-flex gap-3 ${styles.socials}`}>
-                {contactDetail.socials.map((s) => (
-                  <SocialIcon key={s.type} type={s.type} href={s.href} />
-                ))}
+                <ContactForm />
               </div>
-              {/* Overlay background image for detail section */}
-              <div className={styles.detailBg}></div>
+            </div>
+            {/* Contact Detail */}
+            <div
+              className="col-lg-5 d-flex align-items-stretch"
+              style={{
+                background: `linear-gradient(rgba(24,49,83,0.95),rgba(24,49,83,0.95)), url('https://kargonhtml.websitelayout.net/img/content/contact-image.jpg') center/cover no-repeat`,
+              }}
+            >
+              <div className="p-4 p-lg-5 w-100 d-flex flex-column justify-content-center">
+                <h2
+                  className="fw-bold text-white mb-3"
+                  style={{ fontSize: 32 }}
+                >
+                  Our contact detail
+                </h2>
+                <p className="mb-4 text-white-50">
+                  Need any consultations contact with us
+                </p>
+                {/* Phone */}
+                <div className="d-flex mb-4 pb-3 border-bottom border-secondary">
+                  <div className="flex-shrink-0 mt-2">
+                    <FaPhone
+                      className="text-white"
+                      style={{ color: "#f94735", fontSize: 28 }}
+                    />
+                  </div>
+                  <div className="flex-grow-1 ms-4">
+                    <h3 className="h5 text-white mb-2">Phone Number</h3>
+                    <span className="text-white d-block mb-1">
+                      +1 (888) 123-5678
+                    </span>
+                    <span className="text-white">(+44)123 456 789</span>
+                  </div>
+                </div>
+                {/* Email */}
+                <div className="d-flex mb-4 pb-3 border-bottom border-secondary">
+                  <div className="flex-shrink-0 mt-2">
+                    <MdEmail
+                      className="text-white"
+                      style={{ color: "#f94735", fontSize: 28 }}
+                    />
+                  </div>
+                  <div className="flex-grow-1 ms-4">
+                    <h3 className="h5 text-white mb-2">Email Address</h3>
+                    <span className="text-white d-block mb-1">
+                      info@example.com
+                    </span>
+                    <span className="text-white">contact@example.com</span>
+                  </div>
+                </div>
+                {/* Location */}
+                <div className="d-flex mb-4 pb-3 border-bottom border-secondary">
+                  <div className="flex-shrink-0 mt-2">
+                    <FaMapMarkerAlt
+                      className="text-white"
+                      style={{ color: "#f94735", fontSize: 28 }}
+                    />
+                  </div>
+                  <div className="flex-grow-1 ms-4">
+                    <h3 className="h5 text-white mb-2">Location</h3>
+                    <address className="text-white mb-0">
+                      Guild Street 51, North Town, London-06192, UK
+                    </address>
+                  </div>
+                </div>
+                {/* Socials */}
+                <ul className="list-inline mt-4 mb-0">
+                  {socials.map((s) => (
+                    <li key={s.type} className="list-inline-item me-2">
+                      <a
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="d-inline-flex align-items-center justify-content-center rounded-circle"
+                        style={{
+                          width: 44,
+                          height: 44,
+                          background: "#f94735",
+                          color: "#fff",
+                          fontSize: 20,
+                          transition: "background 0.2s, color 0.2s",
+                        }}
+                      >
+                        {s.icon}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Map */}
+      <div>
+        <iframe
+          className="w-100"
+          style={{ minHeight: 400, border: 0 }}
+          id="gmap_canvas"
+          src="https://maps.google.com/maps?q=london&t=&z=13&ie=UTF8&iwloc=&output=embed"
+          loading="lazy"
+        ></iframe>
       </div>
     </div>
   );

@@ -1,11 +1,8 @@
 "use client";
 
 import FadeInSection from "@/components/FadeInSection";
-import bgContact from "@/public/images/bg-contact.jpg";
-import blogImg from "@/public/images/blog-01.jpg";
-import styles from "@/styles/BlogPage.module.css";
-import Image from "next/image";
-import React from "react";
+import { useTranslation } from "next-i18next";
+import { FaSearch } from "react-icons/fa";
 import {
   FaCalendar,
   FaComment,
@@ -14,9 +11,8 @@ import {
   FaLinkedinIn,
   FaUser,
   FaXTwitter,
-  FaYoutube,
 } from "react-icons/fa6";
-import { useTranslation } from "next-i18next";
+import { IoSearch } from "react-icons/io5";
 
 // CommentItem component
 type CommentItemProps = {
@@ -25,323 +21,631 @@ type CommentItemProps = {
   text: string;
 };
 
-const CommentItem: React.FC<CommentItemProps> = ({ avatar, name, text }) => (
-  <div className="d-flex align-items-start mb-3">
-    <img src={avatar} alt={name} className={styles.commentAvatar} />
-    <div>
-      <div className={styles.commentName}>{name}</div>
-      <div className={styles.commentText}>{text}</div>
-      <div className={styles.commentReply}>Reply</div>
-    </div>
-  </div>
-);
-
 const BlogPage = () => {
   const { t } = useTranslation("common");
   const blogPage = t("blogPage", { returnObjects: true }) as any;
 
   return (
     <div>
-      {/* Banner */}
-      <div className="position-relative" style={{ height: "50vh", overflow: "hidden" }}>
-        <Image
-          src={bgContact}
-          alt="Contact Banner"
-          className="position-absolute w-100 h-100"
-          fill
-          style={{ objectFit: "cover" }}
-          priority
-        />
-        <div className={styles.bannerOverlay}>
-          <div className="container py-4 px-4 px-md-5">
-            <div className="w-100 text-center text-md-start">
-              <h1 className="text-white fw-bold display-4 mb-2">{blogPage.banner?.title}</h1>
-              <div className="d-flex align-items-center gap-2 gap-md-3 justify-content-center justify-content-md-start text-white fs-5">
-                <span>{blogPage.banner?.breadcrumbHome}</span>
-                <span className={styles.breadcrumbDivider}></span>
-                <span className={styles.breadcrumbCurrent}>
-                  {blogPage.banner?.breadcrumbCurrent}
-                </span>
+      {/* PAGE TITLE
+        ================================================== */}
+      <section
+        className="page-title-section bg-img cover-background left-overlay-secondary"
+        data-overlay-dark="9"
+        style={{
+          backgroundImage: `url(/images/bg-contact.jpg)`,
+        }}
+      >
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="text-start">
+                <div className="position-relative">
+                  <h1>Blog Details</h1>
+                </div>
+                <ul>
+                  <li>
+                    <a href="https://kargonhtml.websitelayout.net/index.html">
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">Blog Details</a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Responsive layout: main left, sidebar right, sidebar xuống dưới ở mobile */}
-      <div className="container my-5">
-        <div className="row gx-4 gy-5">
-          {/* Main Content */}
-          <div className="col-12 col-lg-8">
-            <FadeInSection className="bg-white rounded-3 shadow p-4 p-lg-5">
-              <FadeInSection>
-                <Image
-                  src={blogImg}
-                  alt="Blog"
-                  width={900}
-                  height={400}
-                  className="rounded-3 w-100 mb-4"
-                  style={{ objectFit: "cover" }}
-                />
-              </FadeInSection>
+      {/* BLOG DETAILS
+        ================================================== */}
+      <section>
+        <div className="container">
+          <div className="row mt-n2-9">
+            <div className="col-lg-8 mt-2-9">
+              <div className="row">
+                <div className="col-lg-12 mb-6">
+                  <article>
+                    <FadeInSection>
+                      <img
+                        src="https://kargonhtml.websitelayout.net/img/blog/blog-01.jpg"
+                        alt="..."
+                        className="mb-2-6 wow fadeInUp"
+                        data-wow-delay="200ms"
+                      />
+                    </FadeInSection>
+                    <div>
+                      <FadeInSection>
+                        <ul
+                          className="list-unstyled d-flex align-items-center border-bottom pb-3 mb-4 gap-4 wow fadeInUp"
+                          data-wow-delay="200ms"
+                        >
+                          <li className="d-flex align-items-center text-capitalize">
+                            <a
+                              href="#"
+                              title="Posts by admin"
+                              rel="author"
+                              className="d-flex align-items-center text-decoration-none text-dark"
+                            >
+                              <FaUser className="text-primary me-2" />
+                              admin
+                            </a>
+                          </li>
+                          <li className="d-flex align-items-center text-capitalize">
+                            <FaCalendar className="text-primary me-2" />
+                            May 25, 2025
+                          </li>
+                          <li className="d-flex align-items-center text-capitalize">
+                            <a
+                              href="#"
+                              className="d-flex align-items-center text-decoration-none text-dark"
+                            >
+                              <FaComment className="text-primary me-2" />
+                              10 Comment
+                            </a>
+                          </li>
+                        </ul>
+                      </FadeInSection>
 
-              <FadeInSection>
-                <div className="d-flex align-items-center gap-4 mb-3">
-                  <span className="d-flex align-items-center gap-2">
-                    <FaUser /> {blogPage.meta?.author}
-                  </span>
-                  <span className="d-flex align-items-center gap-2">
-                    <FaCalendar /> {blogPage.meta?.date}
-                  </span>
-                  <span className="d-flex align-items-center gap-2">
-                    <FaComment /> {blogPage.meta?.comments}
-                  </span>
-                </div>
-                <hr />
-                <div className="text-secondary fs-5 lh-lg">
-                  <p>{blogPage.content?.p1}</p>
-                  <p>{blogPage.content?.p2}</p>
-                </div>
-              </FadeInSection>
+                      <FadeInSection>
+                        <p className="mb-4 wow fadeInUp" data-wow-delay="200ms">
+                          Lorem Ipsum is simply dummy text of the printing and
+                          typesetting industry. Lorem Ipsum has been the
+                          industry's standard dummy text ever since the 1500s,
+                          when an unknown printer took a galley of type and
+                          scrambled it to make a type specimen book. It has
+                          survived not only five centuries, but also the leap
+                          into electronic typesetting, remaining essentially
+                          unchanged. It was popularised in the 1960s with the
+                          release of Letraset sheets containing Lorem Ipsum
+                          passages, and more recently with desktop.
+                        </p>
+                        <p className="mb-4 wow fadeInUp" data-wow-delay="200ms">
+                          Lorem Ipsum is simply dummy text of the printing and
+                          typesetting industry. Lorem Ipsum has been the
+                          industry's standard dummy text ever since the 1500s,
+                          when an unknown printer took a galley of type and
+                          scrambled it to make a type specimen book. It has
+                          survived not only five centuries.
+                        </p>
+                      </FadeInSection>
 
-              <FadeInSection>
-                <div className={styles.quoteBox}>
-                  <span className={styles.quoteMark}>{blogPage.quote?.mark}</span>
-                  <span>
-                    <em>{blogPage.quote?.text}</em>
-                    <div className={styles.quoteAuthor}>
-                      – <b>{blogPage.quote?.author}</b>
-                    </div>
-                  </span>
-                </div>
-              </FadeInSection>
-
-              <FadeInSection>
-                <p className="mb-3 text-secondary">{blogPage.content?.p3}</p>
-                <p className="mb-3 text-secondary">{blogPage.content?.p4}</p>
-              </FadeInSection>
-
-              <FadeInSection>
-                <div className="d-flex gap-3 mb-3 flex-wrap">
-                  <img
-                    src="/images/truck.jpg"
-                    alt="Truck"
-                    className={styles.imgRowItem}
-                  />
-                  <img
-                    src="/images/container.jpg"
-                    alt="Container"
-                    className={styles.imgRowItem}
-                  />
-                  <img
-                    src="/images/ship.jpg"
-                    alt="Ship"
-                    className={styles.imgRowItem}
-                  />
-                </div>
-                <p className="mb-3 text-secondary">{blogPage.content?.p5}</p>
-              </FadeInSection>
-
-              <FadeInSection>
-                <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mt-4 pt-3 border-top">
-                  <div className="d-flex align-items-center gap-2 flex-wrap">
-                    <b>{blogPage.tags?.label}</b>
-                    {blogPage.tags?.items?.map((tag: string) => (
-                      <span key={tag} className={styles.tagItem}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="d-flex align-items-center gap-2 flex-wrap">
-                    <b>{blogPage.share?.label}</b>
-                    <a href="#" className={styles.socialBtn}>
-                      <FaFacebookF />
-                    </a>
-                    <a href="#" className={styles.socialBtn}>
-                      <FaXTwitter />
-                    </a>
-                    <a href="#" className={styles.socialBtn}>
-                      <FaYoutube />
-                    </a>
-                    <a href="#" className={styles.socialBtn}>
-                      <FaLinkedinIn />
-                    </a>
-                  </div>
-                </div>
-
-                {/* Author Box */}
-                <div className={`${styles.authorBox} d-flex align-items-start mt-4`}>
-                  <img
-                    src="https://kargonhtml.websitelayout.net/img/avatar/avatar-01.jpg"
-                    alt="Author"
-                    className={styles.commentAvatar}
-                  />
-                  <div>
-                    <div className={styles.authorName}>{blogPage.author?.name}</div>
-                    <div className={styles.authorDate}>{blogPage.author?.date}</div>
-                    <div className={styles.authorDesc}>{blogPage.author?.desc}</div>
-                    <div className="d-flex gap-2">
-                      <a href="#"><FaFacebookF /></a>
-                      <a href="#"><FaXTwitter /></a>
-                      <a href="#"><FaInstagram /></a>
-                      <a href="#"><FaLinkedinIn /></a>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Comments Section */}
-                <div className={`${styles.commentsBox} mt-4`}>
-                  <div className={styles.commentsTitle}>
-                    {blogPage.comments?.title}
-                  </div>
-                  {blogPage.comments?.items?.map((c: any, idx: number) => (
-                    <CommentItem
-                      key={idx}
-                      avatar={c.avatar}
-                      name={c.name}
-                      text={c.text}
-                    />
-                  ))}
-                </div>
-
-                {/* Leave a Reply Form */}
-                <div className={`${styles.replyBox} mt-4`}>
-                  <div className={styles.replyTitle}>{blogPage.reply?.title}</div>
-                  <form>
-                    <textarea
-                      className={styles.replyTextarea}
-                      placeholder={blogPage.reply?.placeholder}
-                      required
-                    />
-                    <div className="row g-2 mt-2">
-                      <div className="col-12 col-md-6">
-                        <input
-                          type="text"
-                          className={styles.replyInput}
-                          placeholder={blogPage.reply?.name}
-                          required
-                        />
+                      <FadeInSection>
+                        <blockquote
+                          className="mb-4 bg-light fst-italic font-weight-600 px-5 py-4 position-relative wow fadeInu"
+                          data-wow-delay="100ms"
+                        >
+                          {/* Có thể thêm icon quote nếu muốn */}
+                          It is a long established fact that a reader will be
+                          distracted by the readable content of a page when
+                          looking at its layout.
+                          <h6
+                            className="mb-0 mt-4 wow fadeInUp"
+                            data-wow-delay="200ms"
+                          >
+                            – Victoria Fawsitt
+                          </h6>
+                        </blockquote>
+                      </FadeInSection>
+                      <FadeInSection>
+                        <p className="mb-4 wow fadeInUp" data-wow-delay="200ms">
+                          consectetur adipisicing elit sed do eiusmod tempor
+                          incididunt ut labore et dolore magna aliqua. ut enim
+                          ad minim veniam quis nostrud exercitation ullamco
+                          laboris nisi ut aliquip ex ea commodo consequat. duis
+                          aute irure dolor in reprehenderit in voluptate velit
+                          esse cillum dolore eu fugiat nulla pariatur. excepteur
+                          sint occaecat cupidatat non proident minim veniam.
+                        </p>
+                        <p className="mb-4 wow fadeInUp" data-wow-delay="200ms">
+                          Nemo enim ipsam voluptatem quia voluptas sit
+                          aspernatur aut odit aut fugit, sed quia consequuntur
+                          magni dolores eos qui ratione voluptatem sequi
+                          nesciunt. Neque porro quisquam est, qui dolorem ipsum
+                          quia dolor sit amet, consectetur, adipisci velit, sed
+                          quia non numquam eius.
+                        </p>
+                      </FadeInSection>
+                      <FadeInSection>
+                        <div
+                          className="row mt-n4 mb-4 wow fadeInUp"
+                          data-wow-delay="200ms"
+                        >
+                          <div className="col-md-4 mt-4">
+                            <img
+                              src="https://kargonhtml.websitelayout.net/img/blog/blog-detail-01.jpg"
+                              alt="..."
+                            />
+                          </div>
+                          <div className="col-md-4 mt-4">
+                            <img
+                              src="https://kargonhtml.websitelayout.net/img/blog/blog-detail-02.jpg"
+                              alt="..."
+                            />
+                          </div>
+                          <div className="col-md-4 mt-4">
+                            <img
+                              src="https://kargonhtml.websitelayout.net/img/blog/blog-detail-03.jpg"
+                              alt="..."
+                            />
+                          </div>
+                        </div>
+                      </FadeInSection>
+                      <FadeInSection>
+                        <p className="mb-4 wow fadeInUp" data-wow-delay="200ms">
+                          If you are going to use a passage of Lorem Ipsum, you
+                          need to be sure there isn't anything embarrassing
+                          hidden in the middle of text. All the Lorem Ipsum
+                          generators on the Internet tend to repeat predefined
+                          chunks as necessary, making this the first true
+                          generator on the Internet.
+                        </p>
+                      </FadeInSection>
+                      <div className="border-top border-color-light-black pt-5 g-0 d-md-flex align-items-center entry-footer float-start w-100">
+                        <div className="tags flex-grow-1 mb-4 mb-md-0 pe-md-3">
+                          <label className="h6 me-3 mb-0">Tags:</label>
+                          <a href="#" rel="tag">
+                            Logistic
+                          </a>
+                        </div>
+                        <FadeInSection>
+                          <div
+                            className="blog-share-icon wow fadeInUp"
+                            data-wow-delay="200ms"
+                          >
+                            <label className="h6 me-1 mb-0">Share:</label>
+                            <ul className="share-post social-icon-style2-v2">
+                              <li>
+                                <a
+                                  title="Facebook"
+                                  href="#"
+                                  aria-label="Share on Facebook"
+                                >
+                                  <FaFacebookF />
+                                </a>
+                              </li>
+                              <li>
+                                <a
+                                  title="Twitter"
+                                  href="#"
+                                  aria-label="Share on Twitter"
+                                >
+                                  <FaXTwitter />
+                                </a>
+                              </li>
+                              <li>
+                                <a
+                                  title="Pinterest"
+                                  href="#"
+                                  aria-label="Share on Instagram"
+                                >
+                                  <FaInstagram />
+                                </a>
+                              </li>
+                              <li>
+                                <a
+                                  title="LinkedIn"
+                                  href="#"
+                                  aria-label="Share on LinkedIn"
+                                >
+                                  <FaLinkedinIn />
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </FadeInSection>
                       </div>
-                      <div className="col-12 col-md-6">
-                        <input
-                          type="email"
-                          className={styles.replyInput}
-                          placeholder={blogPage.reply?.email}
-                          required
-                        />
-                      </div>
                     </div>
-                    <button type="submit" className={styles.replyBtn}>
-                      {blogPage.reply?.button}
-                    </button>
-                  </form>
+                  </article>
                 </div>
-              </FadeInSection>
-            </FadeInSection>
-          </div>
-
-          {/* Sidebar */}
-          <div className="col-12 col-lg-4">
-            <FadeInSection className="d-flex flex-column gap-4">
-              {/* Search box */}
-              <FadeInSection>
-                <div className={styles.sidebarBox}>
-                  <form className="d-flex">
-                    <input
-                      type="text"
-                      placeholder={blogPage.sidebar?.search}
-                      className="form-control rounded-start"
-                    />
-                    <button type="submit" className="btn btn-danger rounded-end">
-                      <span>🔍</span>
-                    </button>
-                  </form>
-                </div>
-              </FadeInSection>
-
-              {/* Recent Posts */}
-              <FadeInSection>
-                <div className={styles.sidebarBox}>
-                  <div className={styles.sidebarTitle}>
-                    {blogPage.sidebar?.recentTitle}
-                  </div>
-                  <div className={styles.sidebarContent}>
-                    {blogPage.sidebar?.recentPosts?.map((post: any, idx: number) => (
-                      <div className="d-flex gap-2 mb-3 align-items-start" key={idx}>
+                <div
+                  className="col-lg-12 mb-6 wow fadeInUp"
+                  data-wow-delay="200ms"
+                >
+                  <div className="blog-comment primary-shadow border-radius-5 p-4 p-md-5 p-sm-6 position-relative">
+                    <div className="d-flex">
+                      <div className="flex-shrink-0">
                         <img
-                          src={post.img}
-                          alt=""
-                          className={styles.recentPostImg}
+                          src="https://kargonhtml.websitelayout.net/img/avatar/avatar-01.jpg"
+                          alt="..."
+                          className="border-radius-5"
                         />
-                        <div>
-                          <div className={styles.recentPostDate}>{post.date}</div>
-                          <div className={styles.recentPostTitle}>{post.title}</div>
+                      </div>
+                      <div className="flex-grow-1 ms-3">
+                        <div className="mb-3">
+                          <h4 className="h5 mb-0">Josef Massey</h4>
+                          <span className="small text-muted">12 May 2025</span>
+                        </div>
+                        <p>
+                          But must explain to you how all this mistaken idea
+                          denouncing pleasure and praising pain was born and I
+                          will give you a complete account of the system, and
+                          expound the actual teachings
+                        </p>
+                        <ul className="list-unstyled ps-0 mb-0">
+                          <li className="d-inline-block me-3">
+                            <a href="#">
+                              <FaFacebookF />
+                            </a>
+                          </li>
+                          <li className="d-inline-block me-3">
+                            <a href="#">
+                              <FaXTwitter />
+                            </a>
+                          </li>
+                          <li className="d-inline-block me-3">
+                            <a href="#">
+                              <FaInstagram />
+                            </a>
+                          </li>
+                          <li className="d-inline-block">
+                            <a href="#">
+                              <FaLinkedinIn />
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* comment */}
+                <div
+                  className="col-12 mb-5 wow fadeInUp"
+                  data-wow-delay="200ms"
+                >
+                  <div className="primary-shadow p-1-9 p-md-5">
+                    <span className="text-primary fw-bold display-25 d-block mb-4">
+                      #Comments
+                    </span>
+                    <div className="d-flex border-bottom pb-4 mb-5">
+                      <div className="flex-shrink-0">
+                        <img
+                          src="https://kargonhtml.websitelayout.net/img/avatar/avatar-02.jpg"
+                          className="border-radius-5"
+                          alt="..."
+                        />
+                      </div>
+                      <div className="flex-grow-1 ms-3">
+                        <h4 className="h5 mb-2">Denis Irwin</h4>
+                        <p className="mb-1">
+                          xcepteur sint occaecat cupidatat non proident, sunt in
+                          culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <a className="text-primary  small" href="#">
+                          Reply
+                        </a>
+                      </div>
+                    </div>
+                    <div className="d-flex border-bottom pb-4 mb-5">
+                      <div className="flex-shrink-0">
+                        <img
+                          src="https://kargonhtml.websitelayout.net/img/avatar/avatar-03.jpg"
+                          className="border-radius-5"
+                          alt="..."
+                        />
+                      </div>
+                      <div className="flex-grow-1 ms-3">
+                        <h4 className="h5 mb-2">Bruno Roach</h4>
+                        <p className="mb-1">
+                          xcepteur sint occaecat cupidatat non proident, sunt in
+                          culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <a className="text-primary  small" href="#">
+                          Reply
+                        </a>
+                      </div>
+                    </div>
+                    <div className="d-flex">
+                      <div className="flex-shrink-0">
+                        <img
+                          src="https://kargonhtml.websitelayout.net/img/avatar/avatar-04.jpg"
+                          className="border-radius-5"
+                          alt="..."
+                        />
+                      </div>
+                      <div className="flex-grow-1 ms-3">
+                        <h4 className="h5 mb-2">John Martin</h4>
+                        <p className="mb-1">
+                          xcepteur sint occaecat cupidatat non proident, sunt in
+                          culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <a className="text-primary  small" href="#">
+                          Reply
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* end comment*/}
+
+                <div className="col-12 wow fadeInUp" data-wow-delay="200ms">
+                  <span className="text-primary fw-bold display-25 d-block mb-4">
+                    #Leave a reply
+                  </span>
+
+                  {/* Form */}
+                  <form>
+                    <div className="row">
+                      <div className="form-group">
+                        <textarea
+                          name="reply"
+                          rows={6}
+                          className="form-control h-100"
+                          placeholder="Your Reply"
+                        ></textarea>
+                      </div>
+                      <div className="col-sm-6">
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="name"
+                            placeholder="Your Name"
+                          />
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              </FadeInSection>
-
-              {/* Categories */}
-              <FadeInSection>
-                <div className={styles.sidebarBox}>
-                  <div className={styles.sidebarTitle}>
-                    {blogPage.sidebar?.categoriesTitle}
-                  </div>
-                  <div className={styles.sidebarContent}>
-                    {blogPage.sidebar?.categories?.map((cat: any, idx: number) => (
-                      <div key={cat.name} className="d-flex justify-content-between align-items-center py-2 border-bottom">
-                        <span className={styles.categoryName}>{cat.name}</span>
-                        <span className={styles.categoryCount}>({cat.count})</span>
+                      <div className="col-sm-6">
+                        <div className="form-group">
+                          <input
+                            type="email"
+                            className="form-control"
+                            name="email"
+                            placeholder="Email Address"
+                          />
+                        </div>
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                    <div>
+                      <button className="butn-style1 medium" type="submit">
+                        Leave a Reply
+                      </button>
+                    </div>
+                  </form>
+                  {/* End Form */}
                 </div>
-              </FadeInSection>
-
-              {/* Tags */}
-              <FadeInSection>
-                <div className={styles.sidebarBox}>
-                  <div className={styles.sidebarTitle}>
-                    {blogPage.sidebar?.tagsTitle}
-                  </div>
-                  <div className="d-flex flex-wrap gap-2 p-3">
-                    {blogPage.sidebar?.tags?.map((tag: string) => (
-                      <span key={tag} className={styles.tagItem}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+              </div>
+            </div>
+            <div className="col-lg-4 mt-2-9">
+              <div className="sidebar ps-xl-4">
+                <div
+                  className="widget mb-1-9 p-4 widget_search wow fadeInUp"
+                >
+                  <FadeInSection>
+                    <form>
+                      <div className="input-group rounded-0">
+                        <input
+                          type="search"
+                          className="form-control rounded-0 border-end-0 search-input-v2"
+                          placeholder="Search..."
+                          name="s"
+                        />
+                        <div className="input-group-append">
+                          <button
+                            className="butn-style1 rounded-0"
+                            type="button"
+                            style={{height: '100%'}}
+                          >
+                            <FaSearch />
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </FadeInSection>
                 </div>
-              </FadeInSection>
-
-              {/* Follow Us */}
-              <FadeInSection>
-                <div className={styles.sidebarBox}>
-                  <div className={styles.sidebarTitle}>
-                    {blogPage.sidebar?.followTitle}
-                  </div>
-                  <div className="d-flex gap-2 p-3">
-                    <a href="#" className={styles.socialBtn}>
-                      <FaFacebookF />
-                    </a>
-                    <a href="#" className={styles.socialBtn}>
-                      <FaXTwitter />
-                    </a>
-                    <a href="#" className={styles.socialBtn}>
-                      <FaYoutube />
-                    </a>
-                    <a href="#" className={styles.socialBtn}>
-                      <FaLinkedinIn />
-                    </a>
-                  </div>
+                <div className="widget wow" data-wow-delay="200ms">
+                  <FadeInSection>
+                    <h4 className="widget-title text-white">Recent Posts</h4>
+                    <div className="widget-body">
+                      <div className="d-flex recent-post align-items-start align-items-sm-center align-items-lg-start">
+                        <div className="flex-shrink-0 image-hover me-3">
+                          <a href="#">
+                            <img
+                              src="https://kargonhtml.websitelayout.net/img/blog/blog-thumb-01.jpg"
+                              alt="The advantages of a digital supply strategy"
+                            />
+                          </a>
+                        </div>
+                        <div className="flex-grow-1">
+                          <span className="display-30 d-block mb-2 font-weight-500">
+                            January 20, 2025
+                          </span>
+                          <h4 className="h6 mb-0">
+                            <a href="blog-details.html">
+                              The advantages of a digital supply strategy
+                            </a>
+                          </h4>
+                        </div>
+                      </div>
+                      <div className="d-flex mt-4 recent-post align-items-start align-items-sm-center align-items-lg-start">
+                        <div className="flex-shrink-0 image-hover me-3">
+                          <a href="#">
+                            <img
+                              src="https://kargonhtml.websitelayout.net/img/blog/blog-thumb-02.jpg"
+                              alt="We very careful handling the valuable goods"
+                            />
+                          </a>
+                        </div>
+                        <div className="flex-grow-1">
+                          <span className="display-30 d-block mb-2 font-weight-500">
+                            January 20, 2025
+                          </span>
+                          <h4 className="h6 mb-0">
+                            <a href="blog-details.html">
+                              We very careful handling the valuable goods
+                            </a>
+                          </h4>
+                        </div>
+                      </div>
+                      <div className="d-flex mt-4 recent-post align-items-start align-items-sm-center align-items-lg-start">
+                        <div className="flex-shrink-0 image-hover me-3">
+                          <a href="#">
+                            <img
+                              src="https://kargonhtml.websitelayout.net/img/blog/blog-thumb-03.jpg"
+                              alt="Choosing the best logistics for your business"
+                            />
+                          </a>
+                        </div>
+                        <div className="flex-grow-1">
+                          <span className="display-30 d-block mb-2 font-weight-500">
+                            January 20, 2025
+                          </span>
+                          <h4 className="h6 mb-0">
+                            <a href="blog-details.html">
+                              Choosing the best logistics for your business
+                            </a>
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+                  </FadeInSection>
                 </div>
-              </FadeInSection>
-            </FadeInSection>
+                <div
+                  className="widget widget_categories wow fadeInUp"
+                  data-wow-delay="200ms"
+                >
+                  <FadeInSection>
+                    <h4 className="widget-title text-white">Categories</h4>
+                    <div className="widget-body">
+                      <ul>
+                        <li className="cat-item">
+                          <a href="#">
+                            <span className="cat-name">Business</span>{" "}
+                            <span className="float-end cat-count">(2)</span>
+                          </a>
+                        </li>
+                        <li className="cat-item">
+                          <a href="#">
+                            <span className="cat-name">Corporate</span>{" "}
+                            <span className="float-end cat-count">(1)</span>
+                          </a>
+                        </li>
+                        <li className="cat-item">
+                          <a href="#">
+                            <span className="cat-name">Warehousing</span>{" "}
+                            <span className="float-end cat-count">(4)</span>
+                          </a>
+                        </li>
+                        <li className="cat-item">
+                          <a href="#">
+                            <span className="cat-name">Logistic</span>{" "}
+                            <span className="float-end cat-count">(1)</span>
+                          </a>
+                        </li>
+                        <li className="cat-item">
+                          <a href="#">
+                            <span className="cat-name">Delivery</span>{" "}
+                            <span className="float-end cat-count">(8)</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </FadeInSection>
+                </div>
+                <div
+                  className="widget widget_tag_cloud wow fadeInUp"
+                  data-wow-delay="200ms"
+                >
+                  <FadeInSection>
+                    <h4 className="widget-title text-white">Tags</h4>
+                    <div className="widget-body">
+                      <div className="tagcloud">
+                        <ul className="wp-tag-cloud">
+                          <li>
+                            <a href="#">Agency</a>
+                          </li>
+                          <li>
+                            <a href="#">Goods</a>
+                          </li>
+                          <li>
+                            <a href="#">Business</a>
+                          </li>
+                          <li>
+                            <a href="#">Logistic</a>
+                          </li>
+                          <li>
+                            <a href="#">Delivery</a>
+                          </li>
+                          <li>
+                            <a href="#">Cargo</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </FadeInSection>
+                </div>
+                <div className="widget wow fadeInUp" data-wow-delay="200ms">
+                  <FadeInSection>
+                    <h4 className="widget-title text-white">Follow Us</h4>
+                    <div className="widget-body">
+                      <ul className="share-post social-icon-style2-v2">
+                        <li>
+                          <a
+                            title="Facebook"
+                            href="#"
+                            aria-label="Share on Facebook"
+                          >
+                            <FaFacebookF />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            title="Twitter"
+                            href="#"
+                            aria-label="Share on Twitter"
+                          >
+                            <FaXTwitter />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            title="Pinterest"
+                            href="#"
+                            aria-label="Share on Instagram"
+                          >
+                            <FaInstagram />
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            title="LinkedIn"
+                            href="#"
+                            aria-label="Share on LinkedIn"
+                          >
+                            <FaLinkedinIn />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </FadeInSection>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

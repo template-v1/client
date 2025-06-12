@@ -1,114 +1,126 @@
-import styles from "@/styles/Footer.module.css";
+import Image from "next/image";
+import Link from "next/link";
 import {
   FaFacebookF,
   FaLinkedinIn,
   FaXTwitter,
-  FaYoutube,
+  FaInstagram,
 } from "react-icons/fa6";
+import logoInner from "@/public/images/logo-inner.png";
 
 const socials = [
-  { type: "facebook", href: "#" },
-  { type: "twitter", href: "#" },
-  { type: "youtube", href: "#" },
-  { type: "linkedin", href: "#" },
+  { type: "facebook", href: "#", icon: <FaFacebookF /> },
+  { type: "twitter", href: "#", icon: <FaXTwitter /> },
+  { type: "linkedin", href: "#", icon: <FaLinkedinIn /> },
+  { type: "instagram", href: "#", icon: <FaInstagram /> },
 ];
-
-const SocialIcon = ({ type, href }: { type: string; href: string }) => {
-  const iconProps = { size: 28 };
-  let IconComp = null;
-  switch (type) {
-    case "facebook":
-      IconComp = FaFacebookF;
-      break;
-    case "twitter":
-      IconComp = FaXTwitter;
-      break;
-    case "youtube":
-      IconComp = FaYoutube;
-      break;
-    case "linkedin":
-      IconComp = FaLinkedinIn;
-      break;
-    default:
-      return null;
-  }
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={styles.socialIcon}
-    >
-      <IconComp {...iconProps} />
-    </a>
-  );
-};
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.top}>
-        <div className={styles.col}>
-          <h2 className={styles.title}>About Kargon</h2>
-          <p className={styles.desc}>
-            We pride ourselves on providing the best transport and shipping
-            services.
-          </p>
-          <div className={`d-flex gap-3 ${styles.socials}`}>
-            {socials.map((s) => (
-              <SocialIcon key={s.type} type={s.type} href={s.href} />
-            ))}
-          </div>
-        </div>
-        <div className={styles.col}>
-          <h2 className={styles.title}>Contact Us</h2>
-          <div className={styles.contact}>
-            <div>
-              <b>ADDRESS:</b> 66 Guild Street 512B, Great North Town.
-            </div>
-            <div>
-              <b>MAIL:</b> addyour@email
-            </div>
-            <div>
-              <b>PHONE:</b> (+44) 123 456 789
-            </div>
-            <div>
-              <b>FAX ID:</b> (+1) 523-567-987
+    <footer className="footer bg-dark text-white pt-5 pb-0">
+      <div className="container pb-4">
+        <div className="row mb-4">
+          <div className="col-md-6 col-lg-4 mb-4 mb-lg-0">
+            <h2 className="footer-title fw-bold mb-3">About Kargon</h2>
+            <p className="footer-desc mb-4">
+              We pride ourselves on providing the best transport and shipping
+              services.
+            </p>
+            <div className="footer-socials d-flex gap-3">
+              {socials.map((s) => (
+                <Link
+                  key={s.type}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-social-btn d-inline-flex align-items-center justify-content-center rounded-circle"
+                  aria-label={s.type}
+                >
+                  {s.icon}
+                </Link>
+              ))}
             </div>
           </div>
+          <div className="col-md-6 col-lg-4 mb-4 mb-lg-0">
+            <h2 className="footer-title fw-bold mb-3">Contact Us</h2>
+            <ul className="footer-contact-list list-unstyled mb-0">
+              <li>
+                <span className="footer-contact-label fw-bold">ADDRESS:</span>{" "}
+                66 Guild Street 512B, Great North Town.
+              </li>
+              <li>
+                <span className="footer-contact-label fw-bold">MAIL:</span>
+                addyour@email
+              </li>
+              <li>
+                <span className="footer-contact-label fw-bold">PHONE:</span>{" "}
+                (+44) 123 456 789
+              </li>
+              <li>
+                <span className="footer-contact-label fw-bold">FAX ID:</span>{" "}
+                (+1) 523-567-987
+              </li>
+            </ul>
+          </div>
+          <div className="col-md-12 col-lg-4">
+            <h2 className="footer-title fw-bold mb-3">Our Newsletter</h2>
+            <form className="mb-3">
+              <div className="input-group mb-3">
+                <input
+                  type="email"
+                  className="form-control footer-newsletter-input rounded-start-pill"
+                  placeholder="Subscribe with us"
+                  aria-label="Email"
+                />
+                <span className="input-group-text bg-white border-0 rounded-end-pill">
+                  <span className="material-symbols-outlined">search</span>
+                </span>
+              </div>
+              <button
+                type="submit"
+                className="footer-newsletter-btn btn rounded-pill fw-bold py-3 px-4"
+              >
+                SUBSCRIBE NOW
+              </button>
+            </form>
+          </div>
         </div>
-        <div className={styles.col}>
-          <h2 className={styles.title}>Our Newsletter</h2>
-          <form className={styles.newsletter}>
-            <div className={styles.inputWrap}>
-              <input
-                type="email"
-                placeholder="Subscribe with us"
-                className={styles.input}
+        <hr className="border-secondary" />
+        <div className="row align-items-center py-3">
+          <div className="col-md-4 text-center text-md-start mb-3 mb-md-0">
+            <div className="d-flex align-items-center justify-content-center justify-content-md-start">
+              <Image
+                src={logoInner}
+                alt="Kargon Logo"
+                width={150}
+                height={50}
+                className="footer-logo"
               />
-              <span className={`material-symbols-outlined ${styles.inputIcon}`}>
-                person
-              </span>
             </div>
-            <button className={styles.subscribeBtn} type="submit">
-              SUBSCRIBE NOW
-            </button>
-          </form>
-        </div>
-      </div>
-      <div className={styles.bottom}>
-        <div className={styles.logoWrap}>
-          <img src="/logo.svg" alt="Kargon Logo" className={styles.logo} />
-          <div>
-            <div className={styles.brand}>KARGON</div>
-            <div className={styles.slogan}>LOGISTIC SERVICE</div>
+          </div>
+          <div className="col-md-8 text-center text-md-end">
+            <nav className="footer-nav">
+              <Link
+                href="#"
+                className="mx-3 text-white text-decoration-none fw-medium"
+              >
+                About Us
+              </Link>
+              <Link
+                href="#"
+                className="mx-3 text-white text-decoration-none fw-medium"
+              >
+                Services
+              </Link>
+              <Link
+                href="#"
+                className="mx-3 text-white text-decoration-none fw-medium"
+              >
+                Get In Touch
+              </Link>
+            </nav>
           </div>
         </div>
-        <nav className={styles.nav}>
-          <a href="#">About Us</a>
-          <a href="#">Services</a>
-          <a href="#">Get In Touch</a>
-        </nav>
       </div>
     </footer>
   );
