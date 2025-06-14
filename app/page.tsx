@@ -383,7 +383,7 @@ export default function HomePage() {
       </section>
 
       {/* <!-- WHY CHOOSE US ================================================== --> */}
-      <section className="py-0 why-choose-style2">
+      <section className="py-0 why-choose-style2 container">
         <div className="container-fluid p-0">
           <div className="row g-0">
             <div className="col-lg-6 col-xl-7 d-none d-lg-block">
@@ -445,8 +445,10 @@ export default function HomePage() {
         </div>
       </section>
 
+      <div className="m-8"></div>
+
       {/* <!-- PRICING ================================================== --> */}
-      <section>
+      <section className="d-none">
         <div className="container">
           <div
             className="section-title01 mb-1-6 mb-md-2-6 text-center wow fadeInUp"

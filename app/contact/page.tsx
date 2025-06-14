@@ -54,21 +54,8 @@ export default function ContactPage() {
         <div className="container py-5">
           <div className="row g-0">
             {/* Form */}
-            <div className="col-lg-7">
-              <div className="bg-white rounded-4 shadow-sm p-4 h-100">
-                <div className="mb-4">
-                  <span
-                    className="text-uppercase fw-bold"
-                    style={{ color: "#f94735", fontSize: 14 }}
-                  >
-                    01 _ contact
-                  </span>
-                  <h2 className="fw-bold mb-0" style={{ fontSize: 32 }}>
-                    Get in touch
-                  </h2>
-                </div>
-                <ContactForm />
-              </div>
+            <div className="col-lg-7 overflow-x">
+              <ContactForm />
             </div>
             {/* Contact Detail */}
             <div

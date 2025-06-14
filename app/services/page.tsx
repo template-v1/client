@@ -256,7 +256,7 @@ const ServicePage = () => {
       </section>
 
       {/* <!-- PRICING ================================================== --> */}
-      <section>
+      <section className="d-none">
         <div className="container">
           <div
             className="section-title01 mb-1-6 mb-md-2-6 text-center wow fadeInUp"
