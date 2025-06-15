@@ -12,6 +12,8 @@ import { ServiceCard } from "@/components/ui/cards/ServiceCard";
 import PricingCard from "@/components/ui/cards/PricingCard";
 import ContactForm from "@/components/ui/contactForm/ContactForm";
 import FadeInSection from "@/components/FadeInSection";
+import { toastCustom } from "@/configs/toastCustom";
+import { createContactMessage } from "@/services/contact.service";
 
 const services = [
   {
@@ -149,6 +151,31 @@ const processSteps = [
 const ServicePage = () => {
   const { t } = useTranslation("common");
   const [openIdx, setOpenIdx] = useState<number>(0);
+
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    contactNumber: "",
+    message: "",
+    captcha: "",
+  });
+
+  const submitForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = await createContactMessage(data);
+    if (res.status) {
+      toastCustom({ type: "success" });
+      setData({
+        name: "",
+        email: "",
+        subject: "",
+        contactNumber: "",
+        message: "",
+        captcha: "",
+      });
+    }
+  };
 
   return (
     <div>
@@ -321,7 +348,11 @@ const ServicePage = () => {
             </div>
             <div className="col-lg-5 mt-1-9">
               <FadeInSection transition={{ duration: 1.2 }}>
-                <ContactForm />
+                <ContactForm
+                  onSubmit={submitForm}
+                  form={data}
+                  setForm={setData}
+                />
               </FadeInSection>
             </div>
           </div>

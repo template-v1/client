@@ -4,38 +4,19 @@ import InputV2 from "@/components/ui/InputV2";
 import ButtonV2 from "@/components/ui/ButtonV2";
 
 interface ContactFormProps {
+  form: any
+  setForm: (form: any) => void
   onSubmit?: (data: any) => void;
 }
 
-const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    phone: "",
-    message: "",
-    captcha: "",
-  });
+const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, form, setForm }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (onSubmit) onSubmit(form);
-    setForm({
-      name: "",
-      email: "",
-      subject: "",
-      phone: "",
-      message: "",
-      captcha: "",
-    });
-  };
-
   return (
-    <form className={styles.contactForm2Col} onSubmit={handleSubmit}>
+    <form className={styles.contactForm2Col} onSubmit={onSubmit}>
       <div className={styles.header}>
         <span className={styles.subtitle}>Contact us</span>
         <h2 className={styles.title}>Get In Touch</h2>
@@ -53,7 +34,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
         <InputV2
           label="Your Email"
           name="email"
-          type="email"
+          // type="email"
           placeholder="Your email here"
           value={form.email}
           onChange={handleChange}
@@ -71,7 +52,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
         />
         <InputV2
           label="Contact Number"
-          name="phone"
+          name="contactNumber"
           type="tel"
           placeholder="Your phone here"
           value={form.phone}

@@ -10,6 +10,9 @@ import {
 } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { useState } from "react";
+import { createContactMessage } from "@/services/contact.service";
+import { toastCustom } from "@/configs/toastCustom";
 
 const socials = [
   { type: "facebook", href: "#", icon: <FaFacebookF /> },
@@ -19,6 +22,31 @@ const socials = [
 ];
 
 export default function ContactPage() {
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    contactNumber: "",
+    message: "",
+    captcha: "",
+  });
+
+  const submitForm = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = await createContactMessage(data);
+    if (res.status) {
+      toastCustom({ type: "success" });
+      setData({
+        name: "",
+        email: "",
+        subject: "",
+        contactNumber: "",
+        message: "",
+        captcha: "",
+      });
+    }
+  };
+
   return (
     <div>
       {/* Banner Section */}
@@ -55,7 +83,11 @@ export default function ContactPage() {
           <div className="row g-0">
             {/* Form */}
             <div className="col-lg-7 overflow-x">
-              <ContactForm />
+              <ContactForm
+                onSubmit={submitForm}
+                form={data}
+                setForm={setData}
+              />
             </div>
             {/* Contact Detail */}
             <div

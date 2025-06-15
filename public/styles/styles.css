@@ -5103,3 +5103,7 @@ select.header-lang-select option {
 .search-input-v2 {
   outline: none;
 }
+.blog-title-hover:hover {
+  color: #f94735;
+  cursor: pointer;
+}

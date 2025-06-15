@@ -73,7 +73,7 @@ const Header = () => {
             </li>
             <li>
               <Link
-                href="/blog"
+                href="/blogs"
                 className={pathname.startsWith("/blog") ? "active" : ""}
               >
                 Blog

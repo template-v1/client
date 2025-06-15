@@ -1,4 +1,4 @@
-'"use client";';
+'"use client"';
 
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -12,6 +12,7 @@ import "@/public/styles/styles.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import LanguageWrapper from "@/components/LanguageWrapper";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,6 +68,7 @@ export default function RootLayout({
           <Footer />
           <ScrollToTopButton />
         </I18nProvider>
+        <ToastContainer />
       </body>
     </html>
   );
